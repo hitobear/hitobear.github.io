@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="css中的单位有相对和绝对之分，如em rem 是相对单位,px是绝对单位,而相对又有不同的基准值之分，如font-size为百分比时，是相对于其父元素的font-size计算值，而line-height为小数时，是相对于本元素的font-size计算值的，一般说来，相比于绝对单位,使用相对单位能够更加灵活的控制元素的大小,能够以更少的代码达到自适应效果,同时使各元素或各属性之间的大小关系更加清晰">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS中元素的相对值">
+<meta property="og:url" content="http://yoursite.com/2018/02/19/CSS中元素的相对值/index.html">
+<meta property="og:site_name" content="小笨熊的旅途">
+<meta property="og:description" content="css中的单位有相对和绝对之分，如em rem 是相对单位,px是绝对单位,而相对又有不同的基准值之分，如font-size为百分比时，是相对于其父元素的font-size计算值，而line-height为小数时，是相对于本元素的font-size计算值的，一般说来，相比于绝对单位,使用相对单位能够更加灵活的控制元素的大小,能够以更少的代码达到自适应效果,同时使各元素或各属性之间的大小关系更加清晰">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p4a8bakov.bkt.clouddn.com/px.png">
+<meta property="og:updated_time" content="2018-02-20T13:17:14.951Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS中元素的相对值">
+<meta name="twitter:description" content="css中的单位有相对和绝对之分，如em rem 是相对单位,px是绝对单位,而相对又有不同的基准值之分，如font-size为百分比时，是相对于其父元素的font-size计算值，而line-height为小数时，是相对于本元素的font-size计算值的，一般说来，相比于绝对单位,使用相对单位能够更加灵活的控制元素的大小,能够以更少的代码达到自适应效果,同时使各元素或各属性之间的大小关系更加清晰">
+<meta name="twitter:image" content="http://p4a8bakov.bkt.clouddn.com/px.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/19/CSS中元素的相对值/"/>
+
+
+
+
+
+  <title>CSS中元素的相对值 | 小笨熊的旅途</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小笨熊的旅途</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/CSS中元素的相对值/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hitobear">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小笨熊的旅途">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS中元素的相对值</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T16:54:40+08:00">
+                2018-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>css中的单位有相对和绝对之分，如<code>em</code> <code>rem</code> 是相对单位,<code>px</code>是绝对单位,而相对又有不同的基准值之分，如<code>font-size</code>为百分比时，是相对于其父元素的<code>font-size</code>计算值，而<code>line-height</code>为小数时，是相对于本元素的<code>font-size</code>计算值的，一般说来，相比于绝对单位,使用相对单位能够更加灵活的控制元素的大小,能够以更少的代码达到自适应效果,同时使各元素或各属性之间的大小关系更加清晰,直观。</p>
+<h2 id="使用绝对单位px来设置属性值"><a href="#使用绝对单位px来设置属性值" class="headerlink" title="使用绝对单位px来设置属性值"></a>使用绝对单位<code>px</code>来设置属性值</h2><p>先来看一个简单的只包含基本问候语的页面，页面效果如下:</p>
+<p><div align="center"><img src="http://p4a8bakov.bkt.clouddn.com/px.png" width="300" height="300"></div><br>实际的代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">        margin:0;</span><br><span class="line">    &#125;</span><br><span class="line">    #wrapper&#123;</span><br><span class="line">        text-align:center;</span><br><span class="line">        font-size:16px;</span><br><span class="line">        line-height:24px;</span><br><span class="line">    &#125;</span><br><span class="line">    body&#123;</span><br><span class="line">        display:flex;</span><br><span class="line">        justify-content:center;</span><br><span class="line">        align-items:center;</span><br><span class="line">        height:100vh;</span><br><span class="line">        background:linear-gradient(rgba(177,206,90,0.5),rgba(177,206,90,1));</span><br><span class="line">    &#125;</span><br><span class="line">    h2&#123;</span><br><span class="line">        text-align: center;</span><br><span class="line">        font-size:24px;</span><br><span class="line">        line-height:36px;</span><br><span class="line">        margin-bottom:40px;</span><br><span class="line">    &#125;</span><br><span class="line">    p.content&#123;</span><br><span class="line">        text-align:center;</span><br><span class="line">        width:200px;</span><br><span class="line">        margin-bottom:20px;</span><br><span class="line">        font-size:18px;</span><br><span class="line">        line-height:25px;</span><br><span class="line">    &#125;</span><br><span class="line">    button&#123;</span><br><span class="line">        padding: 6px 16px;</span><br><span class="line">        border: 1px solid #446d88;</span><br><span class="line">        background: #58a linear-gradient(#77a0bb, #58a);</span><br><span class="line">        border-radius: 4px;</span><br><span class="line">        box-shadow: 0 1px 5px gray;</span><br><span class="line">        color: white;</span><br><span class="line">        text-shadow: 0 -1px 1px #335166;</span><br><span class="line">        font-size: 20px;</span><br><span class="line">        line-height: 30px;</span><br><span class="line">        display:inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;wrapper&quot;&gt;&lt;h2&gt;CSS之旅&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;content&quot;&gt;欢迎来到CSS世界,我们一起成长吧~&lt;/p&gt;</span><br><span class="line">    &lt;button&gt;Welcome&lt;/button&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，在这里的代码中，包括行高,字体大小，宽度，高度，内边距等等所有的长度单位都用的<code>px</code>,虽然看上去大小很直观，像素值一目了然，但是与此同时后期的维护体验是相当的差。。</p>
+<h2 id="line-height-的相对值"><a href="#line-height-的相对值" class="headerlink" title="line-height 的相对值"></a>line-height 的相对值</h2><p>可以看到，上述的代码中，共有三个地方都出现了<code>line-height</code>属性的设置，包括外层的<code>div</code>,内层的<code>button</code>和<code>p</code>，而且经过稍微的运算可以得出<code>lineheight</code>的值是<code>font-size</code>值的<code>1.5</code>倍,那么如果因为某种原因，我需要将dev的<code>font-size</code>值由<code>16px</code>改为<code>12px</code>,为了确保行高相对于字体的大小和原来不变，需要重新计算出<code>12px</code>的<code>1.5</code>倍的值，其他的字体大小改变同样要经过这个计算，那么既然我们已经直到行高相对于字体大小的比例是固定的，有没有什么办法不用每次<code>font-size</code>值改变时，行高都需要手动重写计算呢？幸好，是有的~~</p>
+<h3 id="line-height设为百分比"><a href="#line-height设为百分比" class="headerlink" title="line-height设为百分比"></a>line-height设为百分比</h3><p><code>line-height</code>值可以设置为百分比，此时它的计算值为<strong>元素本身</strong>的<code>font-size</code>值的百分比大小。<br>上一节的情况，由于想要让行高是字体大小的<code>1.5倍</code>，只要将行高属性设置为<code>line-height:150%</code>即可,这样，当元素的<code>font-size</code>值无论如何变化，<code>line-height</code>的值都无需更改，也能保持行高为元素字体的<code>1.5倍</code>(浏览器会自动计算)</p>
+<h3 id="line-height设为小数"><a href="#line-height设为小数" class="headerlink" title="line-height设为小数"></a>line-height设为小数</h3><p>经过了上述改进，已经可以做到<code>font-size</code>改变时，无需改变<code>line-height</code>了，但现在还有一个问题，可以看到<code>p</code>元素和<code>buttong</code>元素的<code>line-height</code>值和<code>div</code>元素的<code>line-height</code>值是一样的,都是相对于各自元素的字体大小的<code>150%</code>即<code>1.5</code>倍，如果我们确定这几个元素中每个元素的行高和字体比是一样的，那么当这个比例由<code>1.5</code>改为<code>1.6</code>时，需要同时更改这三个元素的<code>line-height</code>属性从<code>150%</code>到<code>160%</code>,这个过程看上去也有些冗余，有没有其它办法呢？当然也是有的~<br>这三个元素有个特点，即<code>p</code>和<code>button</code>元素是<code>div</code>元素的子元素，这时候为了避免上述情况的冗余变更，可以将<code>line-height</code>属性值由<code>百分比形式变为小数形式</code> </p>
+<p><strong><code>line-height</code>设为小数时，可以让继承其属性的子元素直接继承该小数点，而line-height设为百分比时，继承该属性的子元素继承的则是父元素计算好的实际像素值</strong>，这是<code>line-height</code>设置为小数点和百分比的本质区别。</p>
+<p>举例来说，在本例中<code>p</code>时<code>div</code>元素的子元素，如果父元素<code>div</code>的行高设置为<code>150%</code>,不为<code>p</code>元素设置<code>line-height</code>属性的话，则<code>p</code>元素默认继承父元素的<code>line-height</code>计算值(即16px<em>150%=24px)，则无论<code>p</code>元素的<code>font-size</code>值为多大，行高都保持<code>24px</code>，显然时不合理的。这时，为了既能继承父元素的行高和元素字体大小比，又能与元素本身的字体大小相关，只需<strong>将父元素的行高设置为小数形式</strong>即可,给<code>div</code>设置<code>line-height:1.5</code>,这样<code>p</code>元素默认继承的是<code>line-height:1.5</code>,**它的计算值是自身的font-size值</em>1.5**</p>
+<p>采取为父元素设置行高为小数点的形式，这样无需为子元素设置<code>line-height</code>,也会默认继承父元素的行高字体比，(因为<strong><code>line-height</code>属性默认就是继承的</strong>，<code>button</code>元素需要设置<code>line-height:inherit</code>，显示指定继承，否则会被浏览器添加的用户样式覆盖),这中方式既省去了设置多个元素的<code>line-height</code>属性值，又避免了行高字体比变化时的代码冗余变更问题，当比例变化为1.6时，只需显示改变父元素<code>div</code>的行高为<code>line-height：1.6</code>即可。</p>
+<h2 id="font-size的相对值"><a href="#font-size的相对值" class="headerlink" title="font-size的相对值"></a>font-size的相对值</h2><p>示例代码中，父元素<code>div</code>的<code>font-size</code>值是<code>16px</code>,<code>button</code>元素的<code>font-size</code>值是<code>20px</code>,是其父元素的<code>125%</code>,同样地，如果想让buttong元素的字体大小固定为父元素字体大小的<code>1.25</code>倍的话，当父元素的字体值改变时，这时不得不重新计算<code>button</code>元素的大小并重新设置该属性值，为了避免这个问题，font-size也支持相对值，即<code>百分比格式的数值</code>,<strong>当<code>font-size</code>设置为百分比时,是相当于其父元素字体的百分比</strong></p>
+<h2 id="em和rem"><a href="#em和rem" class="headerlink" title="em和rem"></a>em和rem</h2><p>除了某些元素可以设置为百分比外，还有两个相对长度单位，<code>em</code>和<code>rem</code>,<code>em</code>和<code>rem</code>都是灵活，可扩展的长度单位，直接相关于字体的默认大小或指定的大小值，可应用于元素的<code>padding</code>,<code>marign</code>,<code>border-width</code>,<code>line-height</code>等属性。</p>
+<h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>当使用em单位时，实际像素值是em值乘以使用em单位的元素本身的字体大小，如一个元素的<code>font-size</code>值是<code>12px</code>,则当padding值设置为<code>0.2em</code>时，实际内边距的像素值是<code>12*0.2</code>即<code>2.4px</code>。<br>应用em，可以将该例中button相关的<code>padding</code>,<code>margin</code>值设置为相对于字体<code>font-size</code>的像素值的特定比例大小(边框的宽度无需用<code>em</code>表示，固定为<code>px</code>即可)</p>
+<p>将本例中的<code>button</code>元素改良为<code>em</code>值后，相关属性设置如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">button&#123;</span><br><span class="line">        padding: .3em .8em;</span><br><span class="line">        border: 1px solid #446d88;</span><br><span class="line">        background: #58a linear-gradient(#77a0bb, #58a);</span><br><span class="line">        border-radius: .2em;</span><br><span class="line">        box-shadow: 0 .05em .25em gray;</span><br><span class="line">        color: white;</span><br><span class="line">        text-shadow: 0 -0.05em 0.05em #335166;</span><br><span class="line">        font-size: 125%;</span><br><span class="line">        line-height: inherit;</span><br><span class="line">        display:inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###rem<br><code>rem</code>和<code>em</code>极其类似，当使用 <code>rem</code>时，实际的像素大小取决于页面根元素的字体大小，即 html 元素的字体大小，像素值等于根元素字体大小乘以 rem 值</p>
+<p>综上，<code>rem</code>和<code>em</code>使得内外边距，边框等属性都能够相对于字体大小进行设置(等同于可以设置相对字体大小的百分比，用小数点+em单位来表示)，不同之处在于，<code>em</code>是相对于元素本身的字体大小进行设置，而<code>rem</code>是相对于页面根元素(<code>html</code>)的字体大小进行设置的，要想区分要用<code>em</code>还是<code>rem</code>单位，只需确定该属性是和元素本身的字体大小相关联还是和<code>html</code>元素的字体大小相关联</p>
+<p>综上，CSS中应用相对值时，最重要的还是分析清楚属性之间的相关性。<br><a href="https://github.com/hitobear/cssgarden/blob/master/realative/index.html" target="_blank" rel="noopener">代码请戳</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/15/yinyang/" rel="next" title="copy一个精致的单个div实现的阴阳图">
+                <i class="fa fa-chevron-left"></i> copy一个精致的单个div实现的阴阳图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hitobear</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用绝对单位px来设置属性值"><span class="nav-number">1.</span> <span class="nav-text">使用绝对单位px来设置属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#line-height-的相对值"><span class="nav-number">2.</span> <span class="nav-text">line-height 的相对值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#line-height设为百分比"><span class="nav-number">2.1.</span> <span class="nav-text">line-height设为百分比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#line-height设为小数"><span class="nav-number">2.2.</span> <span class="nav-text">line-height设为小数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-size的相对值"><span class="nav-number">3.</span> <span class="nav-text">font-size的相对值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#em和rem"><span class="nav-number">4.</span> <span class="nav-text">em和rem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#em"><span class="nav-number">4.1.</span> <span class="nav-text">em</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hitobear</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
