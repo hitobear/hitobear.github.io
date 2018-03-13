@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这篇总结的起因为我在写导航栏时遇到的一个bug,开始时，导航栏的相关代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;  &amp;lt;meta charset=">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从一次利用块级元素绝对定位引发的bug感悟出元素的包裹性宽度">
+<meta property="og:url" content="http://yoursite.com/2018/03/14/从一次利用块级元素绝对定位引发的bug感悟出元素的包裹性宽度/index.html">
+<meta property="og:site_name" content="小笨熊的旅途">
+<meta property="og:description" content="这篇总结的起因为我在写导航栏时遇到的一个bug,开始时，导航栏的相关代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;  &amp;lt;meta charset=">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T16:15:01.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从一次利用块级元素绝对定位引发的bug感悟出元素的包裹性宽度">
+<meta name="twitter:description" content="这篇总结的起因为我在写导航栏时遇到的一个bug,开始时，导航栏的相关代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;  &amp;lt;meta charset=">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/14/从一次利用块级元素绝对定位引发的bug感悟出元素的包裹性宽度/"/>
+
+
+
+
+
+  <title>从一次利用块级元素绝对定位引发的bug感悟出元素的包裹性宽度 | 小笨熊的旅途</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小笨熊的旅途</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/从一次利用块级元素绝对定位引发的bug感悟出元素的包裹性宽度/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hitobear">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小笨熊的旅途">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从一次利用块级元素绝对定位引发的bug感悟出元素的包裹性宽度</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T00:13:19+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇总结的起因为我在写导航栏时遇到的一个bug,开始时，导航栏的相关代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;</span><br><span class="line">  &lt;title&gt;JS Bin&lt;/title&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">    a&#123;</span><br><span class="line">        text-decoration:none;</span><br><span class="line">        color:white;</span><br><span class="line">    &#125;</span><br><span class="line">    li&#123;</span><br><span class="line">      list-style: none;</span><br><span class="line">    &#125;</span><br><span class="line">   .header nav&#123;</span><br><span class="line">        float:right;</span><br><span class="line">        padding-top:7px;</span><br><span class="line">    &#125;</span><br><span class="line">    nav&gt;ul&gt;li &#123;</span><br><span class="line">        float:left;</span><br><span class="line">        margin:0 17px;</span><br><span class="line">    &#125;</span><br><span class="line">    nav&gt;ul&gt;li&gt;a &#123;</span><br><span class="line">        </span><br><span class="line">        border-top:   3px solid transparent; </span><br><span class="line">        border-bottom: 3px solid transparent;</span><br><span class="line">        padding-top:5px;</span><br><span class="line">        padding-bottom:5px;</span><br><span class="line">        display:block;</span><br><span class="line">        font-weight:bold;</span><br><span class="line">        font-size:12px;</span><br><span class="line">        color:inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"> &lt;div class=&quot;header clearfix&quot; id=&quot;header&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;header-inner&quot;&gt;</span><br><span class="line">            &lt;nav&gt;</span><br><span class="line">                &lt;ul class=&quot;clearfix&quot;&gt;</span><br><span class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;关于&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;技能&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;作品&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;博客&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;日历&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;联系方式&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;其他&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/nav&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>效果如下图一：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/13nav0_20180313225537.png"></image></div>
+
+<div align="center">图1</div><br>接下来我要实现的效果是在博客这一列表项下添加3个子列表，所以我对html简单了添加了以下内容：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;</span><br><span class="line">       &lt;a href=&quot;#&quot;&gt;博客&lt;/a&gt;</span><br><span class="line">      &lt;ul&gt;//新增ul元素</span><br><span class="line">             &lt;li&gt;博客1&lt;/li&gt;</span><br><span class="line">             &lt;li&gt;博客2&lt;/li&gt;</span><br><span class="line">              &lt;li&gt;博客2&lt;/li&gt;</span><br><span class="line">       &lt;/ul&gt;</span><br><span class="line"> &lt;/li&gt;</span><br></pre></td></tr></table></figure><br><br>现在，导航栏效果如下图2：<br><br><div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/13nav2_20180313230704.png"></image></div>
+
+<div align="center">图2</div><br>可以看到，添加了ul列表后，基本实现了子级列表项，但可以明显的看到，此时原列表项博客，收到了子列表项宽度的影响，被明显的拉宽了，这样显然不优雅，那么有没有什么办法，使其不受子列表项的影响，自身宽度保持不变呢？这时候想到了，将子列表项绝对定位，使其脱离文档流， 这样它的宽度肯定不会影响到父元素的宽度了，于是为字列表项ul元素添加了相对于父元素li的绝对定位，相关CSS代码如下：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nav&gt;ul&gt;li &#123;</span><br><span class="line">        position:relative;</span><br><span class="line">    &#125;</span><br><span class="line">    nav&gt;ul&gt;li&gt;ul&#123;</span><br><span class="line">      position:absolute;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br><br>本以为这下可以完成任务了，结果刷新后，效果却如下图3所示<br><div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/13nav3_20180313231556.png"></image></div><br><div align="center">图2</div><br>是的，正如图中所示，绝对定位解决了列表项宽度受影响的问题，但却引入了新的问题，子列表项的宽度太窄了！！那么这是什么原因呢？实验后发现这个表现有两方面的综合原因。<br><br>## 块级元素绝对定位后，它本身及其所有后代块级元素会有包裹性<br>最开始的块级元素及其子元素的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> .pos&#123;</span><br><span class="line">      </span><br><span class="line">      border:1px solid red;</span><br><span class="line">    &#125;</span><br><span class="line">    .first&#123;</span><br><span class="line">      border: 1px solid green;</span><br><span class="line">      margin-bottom:10px;</span><br><span class="line">    &#125;</span><br><span class="line">    .seconed&#123;</span><br><span class="line">      border: 1px solid black;</span><br><span class="line">    &#125;</span><br><span class="line">    .seconed div&#123;</span><br><span class="line">      border: 1px solid #888;</span><br><span class="line">      margin-bottom:5px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;pos&quot;&gt;&lt;div class=&quot;first&quot;&gt;第一个子元素div&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;seconed&quot;&gt;&lt;div&gt;第二个子元素的子元素1 &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;第二个子元素的子元素2 &lt;/div&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure><br><br>效果如下图4所示：<br><div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/13nav4_20180313234058.png"></image></div>
+
+<div align="center">图4</div>
+
+<p>然后为了观察绝对定位的影响，为最外层的div元素设置为绝对定位，如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.pos&#123;</span><br><span class="line">      position:absolute;</span><br><span class="line">     ......</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>之后，效果如图5：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/13nav5_20180313234109.png"></image></div>
+
+<div align="center">图5</div>
+
+<p>对比图5发现，添加绝对定位以后，不管是其本身还是直接子元素<code>first</code>类的<code>div</code>,或是其孙元素<code>seconed</code>类的<code>div</code>的子元素，其宽度均收缩为所包含文字需要的宽度，不再主动填充外层容器，展现了其宽度的包裹性。</p>
+<h2 id="块级元素绝对定位后，它本身的宽度依然不能超过父元素的宽度"><a href="#块级元素绝对定位后，它本身的宽度依然不能超过父元素的宽度" class="headerlink" title="块级元素绝对定位后，它本身的宽度依然不能超过父元素的宽度"></a>块级元素绝对定位后，它本身的宽度依然不能超过父元素的宽度</h2><p>这个特性其实是通俗特性的扩展，及无论是否脱离文档流，div元素本身的宽度都不能自动超出父元素的宽度，除非显示指定宽度值。<br>在最开始的导航栏一例中，设置了绝对定位后，因为脱了了文档流，而恰好其父元素<code>li</code>又设置过<code>float:left</code>属性，因此<code>li</code>的宽度本身就又包裹性，<strong>(浮动元素的宽度包裹性和绝对定位元素的宽度包裹性异曲同工)</strong>,只会包裹住其子元素a标签的内容，(因为ul绝对定位后脱离了文档流，没有绝对定位时还在文档流中，是可以包裹住的，所以绝对定位前ul列表的宽度是正常的)，所以ul标签的宽度受限于父元素li的宽度，当然很窄了！！</p>
+<h2 id="如何解决层层包裹性带来的文字自动换行的bug"><a href="#如何解决层层包裹性带来的文字自动换行的bug" class="headerlink" title="如何解决层层包裹性带来的文字自动换行的bug?"></a>如何解决层层包裹性带来的文字自动换行的bug?</h2><p>经过上面的分析，这里bug的主要原因还是 <code>ul</code>绝对定位以后元素自身脱离文档流，导致浮动的父元素<code>li</code>(本身也有包裹性)未将子元素<code>ul</code>宽度包裹住，只包裹了<code>a</code>标签的宽度，所以，虽然此时ul按理说应该能包裹住子元素的宽度的，但是因为其父元素li宽度过窄，导致ul及其子元素的宽度也受限，其文字内容不得不自动换行了。<br>这里为了解决这个bug，可以换一种思路，只要文字不自动换行是不是就可以了？添加如下样式，即增加<br><code>white-space:nowrap;</code>属性设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nav&gt;ul&gt;li&gt;ul&#123;</span><br><span class="line"> .....</span><br><span class="line">  white-space:nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在效果如图6所示：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/13nav6_20180314000504.png"></image></div>
+
+<div align="center">图6</div>
+
+<p>bug完美解决了~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/13/理解prototype和_proto_/" rel="next" title="理解prototype和__proto__">
+                <i class="fa fa-chevron-left"></i> 理解prototype和__proto__
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hitobear</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#块级元素绝对定位后，它本身的宽度依然不能超过父元素的宽度"><span class="nav-number">1.</span> <span class="nav-text">块级元素绝对定位后，它本身的宽度依然不能超过父元素的宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决层层包裹性带来的文字自动换行的bug"><span class="nav-number">2.</span> <span class="nav-text">如何解决层层包裹性带来的文字自动换行的bug?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hitobear</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
