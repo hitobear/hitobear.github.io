@@ -87,7 +87,7 @@
 <meta property="og:description" content="css中的单位有相对和绝对之分，如em rem 是相对单位,px是绝对单位,而相对又有不同的基准值之分，如font-size为百分比时，是相对于其父元素的font-size计算值，而line-height为小数时，是相对于本元素的font-size计算值的，一般说来，相比于绝对单位,使用相对单位能够更加灵活的控制元素的大小,能够以更少的代码达到自适应效果,同时使各元素或各属性之间的大小关系更加清晰">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p4a8bakov.bkt.clouddn.com/px.png">
-<meta property="og:updated_time" content="2018-02-20T13:17:14.951Z">
+<meta property="og:updated_time" content="2018-03-18T00:50:40.590Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS中元素的相对值">
 <meta name="twitter:description" content="css中的单位有相对和绝对之分，如em rem 是相对单位,px是绝对单位,而相对又有不同的基准值之分，如font-size为百分比时，是相对于其父元素的font-size计算值，而line-height为小数时，是相对于本元素的font-size计算值的，一般说来，相比于绝对单位,使用相对单位能够更加灵活的控制元素的大小,能够以更少的代码达到自适应效果,同时使各元素或各属性之间的大小关系更加清晰">
@@ -315,7 +315,7 @@
 <h2 id="em和rem"><a href="#em和rem" class="headerlink" title="em和rem"></a>em和rem</h2><p>除了某些元素可以设置为百分比外，还有两个相对长度单位，<code>em</code>和<code>rem</code>,<code>em</code>和<code>rem</code>都是灵活，可扩展的长度单位，直接相关于字体的默认大小或指定的大小值，可应用于元素的<code>padding</code>,<code>marign</code>,<code>border-width</code>,<code>line-height</code>等属性。</p>
 <h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>当使用em单位时，实际像素值是em值乘以使用em单位的元素本身的字体大小，如一个元素的<code>font-size</code>值是<code>12px</code>,则当padding值设置为<code>0.2em</code>时，实际内边距的像素值是<code>12*0.2</code>即<code>2.4px</code>。<br>应用em，可以将该例中button相关的<code>padding</code>,<code>margin</code>值设置为相对于字体<code>font-size</code>的像素值的特定比例大小(边框的宽度无需用<code>em</code>表示，固定为<code>px</code>即可)</p>
 <p>将本例中的<code>button</code>元素改良为<code>em</code>值后，相关属性设置如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">button&#123;</span><br><span class="line">        padding: .3em .8em;</span><br><span class="line">        border: 1px solid #446d88;</span><br><span class="line">        background: #58a linear-gradient(#77a0bb, #58a);</span><br><span class="line">        border-radius: .2em;</span><br><span class="line">        box-shadow: 0 .05em .25em gray;</span><br><span class="line">        color: white;</span><br><span class="line">        text-shadow: 0 -0.05em 0.05em #335166;</span><br><span class="line">        font-size: 125%;</span><br><span class="line">        line-height: inherit;</span><br><span class="line">        display:inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###rem<br><code>rem</code>和<code>em</code>极其类似，当使用 <code>rem</code>时，实际的像素大小取决于页面根元素的字体大小，即 html 元素的字体大小，像素值等于根元素字体大小乘以 rem 值</p>
+<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p><code>rem</code>和<code>em</code>极其类似，当使用 <code>rem</code>时，实际的像素大小取决于页面根元素的字体大小，即 html 元素的字体大小，像素值等于根元素字体大小乘以 rem 值</p>
 <p>综上，<code>rem</code>和<code>em</code>使得内外边距，边框等属性都能够相对于字体大小进行设置(等同于可以设置相对字体大小的百分比，用小数点+em单位来表示)，不同之处在于，<code>em</code>是相对于元素本身的字体大小进行设置，而<code>rem</code>是相对于页面根元素(<code>html</code>)的字体大小进行设置的，要想区分要用<code>em</code>还是<code>rem</code>单位，只需确定该属性是和元素本身的字体大小相关联还是和<code>html</code>元素的字体大小相关联</p>
 <p>综上，CSS中应用相对值时，最重要的还是分析清楚属性之间的相关性。<br><a href="https://github.com/hitobear/cssgarden/blob/master/realative/index.html" target="_blank" rel="noopener">代码请戳</a></p>
 
@@ -431,7 +431,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -468,7 +468,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用绝对单位px来设置属性值"><span class="nav-number">1.</span> <span class="nav-text">使用绝对单位px来设置属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#line-height-的相对值"><span class="nav-number">2.</span> <span class="nav-text">line-height 的相对值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#line-height设为百分比"><span class="nav-number">2.1.</span> <span class="nav-text">line-height设为百分比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#line-height设为小数"><span class="nav-number">2.2.</span> <span class="nav-text">line-height设为小数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-size的相对值"><span class="nav-number">3.</span> <span class="nav-text">font-size的相对值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#em和rem"><span class="nav-number">4.</span> <span class="nav-text">em和rem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#em"><span class="nav-number">4.1.</span> <span class="nav-text">em</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用绝对单位px来设置属性值"><span class="nav-number">1.</span> <span class="nav-text">使用绝对单位px来设置属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#line-height-的相对值"><span class="nav-number">2.</span> <span class="nav-text">line-height 的相对值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#line-height设为百分比"><span class="nav-number">2.1.</span> <span class="nav-text">line-height设为百分比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#line-height设为小数"><span class="nav-number">2.2.</span> <span class="nav-text">line-height设为小数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-size的相对值"><span class="nav-number">3.</span> <span class="nav-text">font-size的相对值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#em和rem"><span class="nav-number">4.</span> <span class="nav-text">em和rem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#em"><span class="nav-number">4.1.</span> <span class="nav-text">em</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rem"><span class="nav-number">4.2.</span> <span class="nav-text">rem</span></a></li></ol></li></ol></div>
             
 
           </div>
