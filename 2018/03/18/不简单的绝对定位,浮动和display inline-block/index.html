@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/19nav2_20180320074424.png">
 <meta property="og:image" content="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/19nav3_20180320075313.png">
 <meta property="og:image" content="http://p4a8bakov.bkt.clouddn.com/image/css/2018/03/19nav3_20180320075313.png">
-<meta property="og:updated_time" content="2018-03-21T16:15:29.277Z">
+<meta property="og:updated_time" content="2018-03-21T16:18:11.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不简单的绝对定位,浮动和display inline-block">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;绝对定位，浮动和display:ilinline-block都是界面布局中常用的设置方式，一直以为这几个属性很简单，在我眼里，想要绝对定位于一个元素时，才会用绝对定位(顾名思义？？)，想要让多个块级元素水平排列时用浮动或display:inline-block(曾经一度觉得这两种方式有些重复，感觉不到它们的区别。。所以自己常常用浮动，display:inline-block">
@@ -402,8 +402,8 @@
 <p>&emsp;&emsp;<code>inline-block</code>的元素的宽度最大值受到其父元素宽度的限制 </p>
 <p>&emsp;&emsp;浮动元素虽然(半)脱离文档流，但它的宽度最大值也要受到其父元素宽度的限制 </p>
 <p>&emsp;&emsp; 绝对定位元素时完全脱离文档流的，但它和浮动元素类似，也会受到普通文档流中的元素的宽度的限制，只是这个元素不一定是其父元素，而是被它绝对定位于的那个元素(它的第一个定位过的祖先元素或根元素) </p>
-<h3 id="包裹性元素的包裹性"><a href="#包裹性元素的包裹性" class="headerlink" title="包裹性元素的包裹性"></a>包裹性元素的包裹性</h3></blockquote>
-<p>&emsp;&emsp;在满足包裹性元素的宽度限制的情况下，它会尽可能的延展自己的宽度能够包裹住自身内容，当刚好包裹的时候，停止延展；反之，如果在延展的过程中，达到了它的极限值，即上一节计算出的应有的最大值，这时候它的内容(如文字，指定宽度的块级子元素除外，因为想换行也换不了:)会自动换行。</p>
+</blockquote>
+<h3 id="包裹性元素的包裹性"><a href="#包裹性元素的包裹性" class="headerlink" title="包裹性元素的包裹性"></a>包裹性元素的包裹性</h3><p>&emsp;&emsp;在满足包裹性元素的宽度限制的情况下，它会尽可能的延展自己的宽度能够包裹住自身内容，当刚好包裹的时候，停止延展；反之，如果在延展的过程中，达到了它的极限值，即上一节计算出的应有的最大值，这时候它的内容(如文字，指定宽度的块级子元素除外，因为想换行也换不了:)会自动换行。</p>
 <h3 id="包裹性元素的包裹性会影响子级块元素的宽度"><a href="#包裹性元素的包裹性会影响子级块元素的宽度" class="headerlink" title="包裹性元素的包裹性会影响子级块元素的宽度"></a>包裹性元素的包裹性会影响子级块元素的宽度</h3><p>&emsp;&emsp;无论是<code>inline-block</code>,浮动元素，还是绝对定位元素所形成的包裹性元素，都不只是仅仅使得自身具有包裹性，而是会进一步影响其子孙元素，使他们的宽度被限制。</p>
 
       
