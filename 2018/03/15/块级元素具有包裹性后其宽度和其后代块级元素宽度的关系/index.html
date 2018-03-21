@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="小笨熊的旅途">
 <meta property="og:description" content="普通块级元素的宽度是受到父元素宽度影响的，满足等式子元素margin-left+子元素border-left+子元素padding-left+子元素width+子元素padding-right+子元素border-right+子元素paddig-right=父元素width,当子元素的边框值，内外边距都等于0时，由公式可以推导出，子元素的宽度即等于父元素的宽度。即普通的块级元素的宽度是具有扩张性的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-15T13:49:16.066Z">
+<meta property="og:updated_time" content="2018-03-20T23:47:37.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="块级元素具有包裹性后其宽度和其后代块级元素宽度的关系">
 <meta name="twitter:description" content="普通块级元素的宽度是受到父元素宽度影响的，满足等式子元素margin-left+子元素border-left+子元素padding-left+子元素width+子元素padding-right+子元素border-right+子元素paddig-right=父元素width,当子元素的边框值，内外边距都等于0时，由公式可以推导出，子元素的宽度即等于父元素的宽度。即普通的块级元素的宽度是具有扩张性的">
@@ -329,7 +329,7 @@
 </ol>
 <p>以上的计算方式其实是在外层包裹性元素的宽度不会受其它元素限制，可以随子元素内容扩充的情况下才有效的，即若外层包裹性元素的宽度受限的话，计算出的maxWidth有可能大于外层包裹性元素的受限宽度，此时，该外层包裹性元素的宽度依然取得是它的受限宽度(即因为受限，宽度最大不能超过XXX，或者因为受限，宽度必须为XXX)，受限的情况可能有好几种，比如以下两种情况：</p>
 <ul>
-<li><p>该包裹性元素的父元素的宽度是一定的，那么该元素的宽度肯定不会超过父元素的宽度值，此时跳过第2,3，步，直接取受限宽度和maxInlineWidth值的最大值作为外层包裹性元素的宽度即可，其它步骤一样；</p>
+<li><p>该包裹性元素的父元素的宽度是一定的，那么该元素的宽度肯定不会超过父元素(<strong>如果包裹性元素是绝对定位元素，则是它的宽度不会超过被绝对定位的元素的宽度,本文中提到包裹性元素和父元素的关系时，如果是绝对定位元素，则父元素均应用被绝对定位的那个元素替换，本文其它地方为了统一说明，均用父元素代替</strong>)的宽度值，此时跳过第2,3，步，直接取受限宽度和maxInlineWidth值的最大值作为外层包裹性元素的宽度即可，其它步骤一样；</p>
 </li>
 <li><p>显示为该包裹性元素指定了width值得话，那么该包裹性元素的宽度值也确定了，此时可以直接跳过1,2,3，即maxWidth的值直接为它的指定值，子块级元素受限于该外层div元素的同时也会依据它来扩充（即子元素的宽度不会超过该宽度值，但当子块级元素按包裹性计算为比该宽度值小时，又会自动扩充到该宽度值）。</p>
 </li>
@@ -449,7 +449,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
