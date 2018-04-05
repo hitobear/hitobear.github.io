@@ -87,7 +87,7 @@
 <meta property="og:description" content="title: DOM事件全整理之从DOM事件级别,DOM事件流到事件委托&amp;emsp;&amp;emsp;JS编程中常常接触到DOM事件，虽然只是事件而已，但是处于历史原因，它是足够复杂的，也足够强大的，由于自己之前总是对DOM事件的一些概念模糊不清，所以这里来做一下总结啦 DOM级别与DOM事件&amp;emsp;&amp;emsp;我们常听到DOM0级事件，DOM1级事件，DOM2级事件处理，其实这里的DOM0，DO">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p4a8bakov.bkt.clouddn.com/event1.png">
-<meta property="og:updated_time" content="2018-04-05T12:31:32.932Z">
+<meta property="og:updated_time" content="2018-04-05T12:34:16.491Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小笨熊的旅途">
 <meta name="twitter:description" content="title: DOM事件全整理之从DOM事件级别,DOM事件流到事件委托&amp;emsp;&amp;emsp;JS编程中常常接触到DOM事件，虽然只是事件而已，但是处于历史原因，它是足够复杂的，也足够强大的，由于自己之前总是对DOM事件的一些概念模糊不清，所以这里来做一下总结啦 DOM级别与DOM事件&amp;emsp;&amp;emsp;我们常听到DOM0级事件，DOM1级事件，DOM2级事件处理，其实这里的DOM0，DO">
@@ -378,9 +378,12 @@
 <li>阻止默认事件行为</li>
 </ol>
 <p>&emsp;&emsp;IE浏览器的<code>event</code>事件没有<code>preventDefault()</code>这个方法，但是可以通过设置<code>event</code>的<code>returnValue</code>值为<code>false</code>来达到同样的效果，如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">window.event.returnValue=false;</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">3. 阻止冒泡 </span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;IE浏览器的`event`对象也没有`stopPropagation()`方法，但可以设置`cancelBubble`属性为`true`，阻止事件的继续传播，如下:</span><br></pre></td></tr></table></figure>
-<p>window.event.cancelBubble=true; </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 事件委托 </span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;事件委托就是利用事件冒泡，只需指定一个事件处理程序，就可以管理某一类型的所有事件，通过事件委托，可以做到通过在祖先元素添加一个事件处理程序，就可以控制其子孙元素的某些行为。</span><br><span class="line"></span><br><span class="line">1. 首先来看利用事件委托来管理某一类型的所有事件的例子。</span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;需求是未ul下的所有li添加click事件对应的行为处理，在没有用事件委托之前，代码是着这样的:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">window.event.returnValue=false;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>阻止冒泡 </li>
+</ol>
+<p>&emsp;&emsp;IE浏览器的<code>event</code>对象也没有<code>stopPropagation()</code>方法，但可以设置<code>cancelBubble</code>属性为<code>true</code>，阻止事件的继续传播，如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">window.event.cancelBubble=true; </span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## 事件委托 </span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;事件委托就是利用事件冒泡，只需指定一个事件处理程序，就可以管理某一类型的所有事件，通过事件委托，可以做到通过在祖先元素添加一个事件处理程序，就可以控制其子孙元素的某些行为。</span><br><span class="line"></span><br><span class="line">1. 首先来看利用事件委托来管理某一类型的所有事件的例子。</span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;需求是未ul下的所有li添加click事件对应的行为处理，在没有用事件委托之前，代码是着这样的:</span><br></pre></td></tr></table></figure>
 <p><ul></ul></p>
 <p><li>列表项1</li></p>
 <p><li>列表项2</li></p>
