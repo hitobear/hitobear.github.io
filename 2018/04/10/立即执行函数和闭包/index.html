@@ -81,14 +81,14 @@
 
 <meta name="description" content="&amp;emsp;&amp;emsp;我们常常听到别人问:什么是立即执行函数？什么是闭包？它们有什么联系？它们的作用是什么？最近刚好对这个问题有些思考，这里就做一下下总结 立即执行函数&amp;emsp;&amp;emsp;要说什么是立即函数，顾名思义，立即执行的函数呗，那么为什么要用立即执行函数呢？这就要从一个老生常谈的问题说起了 变量污染&amp;emsp;&amp;emsp;我们知道，所有在函数外定义的变量都是全局变量，而全局变量多了，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="也说一说立即执行函数和闭包">
+<meta property="og:title" content="立即执行函数和闭包再总结">
 <meta property="og:url" content="http://yoursite.com/2018/04/10/立即执行函数和闭包/index.html">
 <meta property="og:site_name" content="小笨熊的旅途">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;我们常常听到别人问:什么是立即执行函数？什么是闭包？它们有什么联系？它们的作用是什么？最近刚好对这个问题有些思考，这里就做一下下总结 立即执行函数&amp;emsp;&amp;emsp;要说什么是立即函数，顾名思义，立即执行的函数呗，那么为什么要用立即执行函数呢？这就要从一个老生常谈的问题说起了 变量污染&amp;emsp;&amp;emsp;我们知道，所有在函数外定义的变量都是全局变量，而全局变量多了，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T14:41:56.943Z">
+<meta property="og:updated_time" content="2018-04-12T14:58:37.099Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="也说一说立即执行函数和闭包">
+<meta name="twitter:title" content="立即执行函数和闭包再总结">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;我们常常听到别人问:什么是立即执行函数？什么是闭包？它们有什么联系？它们的作用是什么？最近刚好对这个问题有些思考，这里就做一下下总结 立即执行函数&amp;emsp;&amp;emsp;要说什么是立即函数，顾名思义，立即执行的函数呗，那么为什么要用立即执行函数呢？这就要从一个老生常谈的问题说起了 变量污染&amp;emsp;&amp;emsp;我们知道，所有在函数外定义的变量都是全局变量，而全局变量多了，">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>也说一说立即执行函数和闭包 | 小笨熊的旅途</title>
+  <title>立即执行函数和闭包再总结 | 小笨熊的旅途</title>
   
 
 
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">也说一说立即执行函数和闭包</h1>
+          <h1 class="post-title" itemprop="name headline">立即执行函数和闭包再总结</h1>
         
 
         <div class="post-meta">
@@ -323,7 +323,7 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var a=!function()&#123;</span><br><span class="line">    ...</span><br><span class="line">    return&#123;</span><br><span class="line">        b:2,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;可以看到1和2两种方式都能够将立即执行函数的内部信息传递给外界，而且乍一看上去，好像方式1更好一点，貌似少用了一个变量啊，其实不然，它最终还是经过了为window对象添加属性的，等同于增加了全局变量，并且还有一个缺点，试想，如果这个函数代码超长，我还需要在函数内去<br>搜索到底哪些地方对window赋值了，才能知道这个立即函数执行后添加了哪些全局变量，所以显然方式2就逻辑清晰多了，只要我们约定俗称了，只需看整个函数所赋值的变量，一切就都明了啦，当然，用方式2的方法，最终要的一点可能是：显得高大上，哈哈</p>
-<p>&emsp;&emsp;说道这里，还没说到闭包呢，闭包就是能够访问到外部函数内的变量的函数(函数+能访问到外部函数中的变量，缺一不可~),闭包的常用场景之一是：利用闭包和立即执行函数结合，使得内部信息得以隐藏，只返回必要的方法作为外部接口，实现模块化，现在结合上述提到的立即执行函数的一系列心路历程，感觉清晰了好多！</p>
+<p>&emsp;&emsp;说到这里，还没说到闭包呢，闭包就是能够访问到外部函数内的变量的函数(函数+能访问到外部函数中的变量，缺一不可~),闭包的常用场景之一是：利用闭包和立即执行函数结合，使得内部信息得以隐藏，只返回必要的方法作为外部接口，实现模块化，现在结合上述提到的立即执行函数的一系列心路历程，感觉清晰了好多！</p>
 
       
     </div>
