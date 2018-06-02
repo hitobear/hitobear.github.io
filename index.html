@@ -229,6 +229,549 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/重新认识flex缩写属性—[flex]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hitobear">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小笨熊的旅途">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/重新认识flex缩写属性—[flex]/" itemprop="url">重新认识flex缩写属性—[flex]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T06:54:56+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="flex-1引发的疑惑"><a href="#flex-1引发的疑惑" class="headerlink" title="flex:1引发的疑惑"></a>flex:1引发的疑惑</h2><p>&emsp;&emsp;flex是flex-grow,flex-shrink,flex-basis三个属性值的缩写，所以我也曾以为只是单纯缩写而已，没什么复杂的，直到看了flex:1能实现各子元素均分外层容器空间的效果：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex17.png"></image></div><br><div align="center">图1</div>
+
+<p>&emsp;&emsp;html和css代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;我是左侧的item&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;我是右侧的item,我的内容比较多&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.container&#123;</span><br><span class="line">     height:300px;</span><br><span class="line">     width:400px;</span><br><span class="line">     border:1px solid red;</span><br><span class="line">     display:flex;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> .inner&#123;</span><br><span class="line">     border:1px solid black;</span><br><span class="line">     flex:1;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;按照我最初的理解，flex:1相当于设置了flex-grow:1,flex-shrink:1(默认值),flex-basis:auto(默认值)，而如果对元素这样设置三个属性值的话，效果如下图2所示，明显是水平均分的，因为flex-grow为1只是表示均分多余的空间</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex18.png"></image></div><br><div align="center">图2</div>
+
+<p>&emsp;&emsp;那么问题来了，flex:1并不等价于flex-grow:1,flex-shrink:1(默认值),flex-basis:auto啊，说好的缩写呢？</p>
+<h2 id="flex是缩写"><a href="#flex是缩写" class="headerlink" title="flex是缩写"></a>flex是缩写</h2><p>&emsp;&emsp;flex是flex-grow,flex-shrink和flex-basis的缩写，flex属性值可以只指定一个属性的值，而另外的属性值采用各自在flex属性中的的初始值，但是有一点要注意的是：flex属性中flex-grow和flex-basis的初始值和它们原始的默认值不同，至于为什么不同，mdn中有明确的说过<code>这样的设计是为了让「flex」缩写在最常见的情景下比较好用。</code></p>
+<h2 id="flex中对应各属性的初始值"><a href="#flex中对应各属性的初始值" class="headerlink" title="flex中对应各属性的初始值"></a>flex中对应各属性的初始值</h2><h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h3><p>&emsp;&emsp;flex-grow用于设置各item项按对应比例划分剩余空间，若flex中没有指定flex-grow,则相当于设置了flex-grow:1</p>
+<h3 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h3><p>&emsp;&emsp;flex-shrink用于设置item的总和超出容器空间时，各item的收缩比例，若flex中没有指定flex-shrink,则等同于设置了flex-shrink:1</p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>&emsp;&emsp;flex-basis用于设置各item项的伸缩基准值，可以取值为长度或百分比，如果flex中省略了该属性，则相当于设置了flex-basis:0.</p>
+<h2 id="flex的不同取值"><a href="#flex的不同取值" class="headerlink" title="flex的不同取值"></a>flex的不同取值</h2><p>&emsp;&emsp;flex的值的完整写法是[\<flex-grow> \<flex-shrink> \<flex-basis>],不过它的取值还有可能是单个数字或者单个百分比等，不同种类的取值所表示的意思是大有不同的。</flex-basis></flex-shrink></flex-grow></p>
+<h3 id="flex值为none"><a href="#flex值为none" class="headerlink" title="flex值为none"></a>flex值为none</h3><p>&emsp;&emsp;当flex为none时,等同于flex: 0 0 auto;</p>
+<h3 id="flex值为auto"><a href="#flex值为auto" class="headerlink" title="flex值为auto"></a>flex值为auto</h3><p>&emsp;&emsp;当flex为auto时，等同于flex: 1 1 auto;</p>
+<h3 id="flex值为一个非负数字"><a href="#flex值为一个非负数字" class="headerlink" title="flex值为一个非负数字"></a>flex值为一个非负数字</h3><p>&emsp;&emsp;当flex取值为一个数字，则该数字是设置的flex-grow值，其它两个属性用初始值，如flex:1时，等同于flex: 1 1 0%</p>
+<h3 id="flex值为两个非负数字"><a href="#flex值为两个非负数字" class="headerlink" title="flex值为两个非负数字"></a>flex值为两个非负数字</h3><p>&emsp;&emsp;当flex取值为2个数字时，相当于设置的flex-grow和flex-shrink值，flex-basis取值为初始值，如flex:1 0时，等同于flex: 1 0 0%</p>
+<h3 id="flex值为一个数字和一个长度或百分比时"><a href="#flex值为一个数字和一个长度或百分比时" class="headerlink" title="flex值为一个数字和一个长度或百分比时"></a>flex值为一个数字和一个长度或百分比时</h3><p>&emsp;&emsp;当flex取值为1个数字和1个长度或百分比时，设置的是flex-grow和flex-basis的值，flex-shrink值时初始值，如flex:1 20%,等同于flex: 1 1 20%</p>
+<p>&emsp;&emsp;原来一个简单的缩写属性flex是有这么多花样的~那么我不想背它的初始值，不同值对应的缩放属性等等，有这么多原因，以后是不是不用flex就可以了，光明正大用flex-grow,flex-shrink,flex-basis就好了？当然是可以了~不过用flex至少还是有它的好处的，比如说看上去简洁(一个flex属性能有这么多不同效果进而显得高大上),还有重要的一点，同样的一个单词能完成三个单词的工作，能使代码少啊:）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/进一步了解flex布局—来实现这些常见布局吧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hitobear">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小笨熊的旅途">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/进一步了解flex布局—来实现这些常见布局吧/" itemprop="url">进一步了解flex布局—来实现这些常见布局吧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T07:03:10+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>&emsp;&emsp;flex布局具有便捷、灵活的特点，熟练的运用flex布局能解决大部分布局问题，这里对一些常用布局场景做一些总结。</p>
+<h2 id="web页面布局-topbar-main-footbar"><a href="#web页面布局-topbar-main-footbar" class="headerlink" title="web页面布局(topbar + main + footbar)"></a>web页面布局(topbar + main + footbar)</h2><h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>&emsp;&emsp;要实现的效果如下：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex11.png"></image></div><br><div align="center">图1</div>
+
+<p>&emsp;&emsp;html代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;header&gt;header...&lt;/header&gt;</span><br><span class="line">  &lt;main&gt;内容&lt;/main&gt;</span><br><span class="line">  &lt;footer&gt;footer...&lt;/footer&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;css代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">header&#123;</span><br><span class="line">  height:100px;</span><br><span class="line">  background:#ccc;</span><br><span class="line">&#125;</span><br><span class="line">footer&#123;</span><br><span class="line">  height:100px;</span><br><span class="line">  background:#ccc;</span><br><span class="line">&#125;</span><br><span class="line">.container&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  flex-direction:column;</span><br><span class="line">  height:100vh;</span><br><span class="line">&#125;</span><br><span class="line">main&#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用的flex属性"><a href="#应用的flex属性" class="headerlink" title="应用的flex属性"></a>应用的flex属性</h3><p>&emsp;&emsp;本例中主要应用了以下flex属性：</p>
+<ol>
+<li>flex-direction:column 使整体布局从上到下排列</li>
+<li>flex-grow:1, 应用于main，使得main自动填充剩余空间</li>
+</ol>
+<p>本例中应用以较少的css代码实现了传统的上中下页面布局，其中的关键通过flex-grow的使用避免了当main内容过少时footer部分会被提升到页面上方的问题(传统方式上可能需要靠绝对定位来解决了~)</p>
+<h2 id="每行的项目数固定并自动换行的列表项"><a href="#每行的项目数固定并自动换行的列表项" class="headerlink" title="每行的项目数固定并自动换行的列表项"></a>每行的项目数固定并自动换行的列表项</h2><p>&emsp;&emsp;要实现的效果如下：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex12.png"></image></div><br><div align="center">图2</div>
+
+<p>&emsp;&emsp;html代码：</p>
+<h3 id="示例代码-1"><a href="#示例代码-1" class="headerlink" title="示例代码"></a>示例代码</h3><p>&emsp;&emsp;css代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ul&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  flex-wrap:wrap;</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">  list-style:none;</span><br><span class="line">  flex:0 0 25%;</span><br><span class="line">  background:#ddd;</span><br><span class="line">  height:100px;</span><br><span class="line">  border:1px solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用的flex属性-1"><a href="#应用的flex属性-1" class="headerlink" title="应用的flex属性"></a>应用的flex属性</h3><p>&emsp;&emsp;本例中主要应用了以下flex属性：</p>
+<ol>
+<li><p>flex:0 0 25%,相当于flex-basis:25%，使得每一个列表项的宽度占外层容器(本例中的ul元素)的25%，因此每行最多能够排开四个列表项。</p>
+</li>
+<li><p>flex-wrap:wrap,使得每行填满时会自动换行</p>
+</li>
+</ol>
+<h2 id="实现自动划分多余空间的列表项"><a href="#实现自动划分多余空间的列表项" class="headerlink" title="实现自动划分多余空间的列表项"></a>实现自动划分多余空间的列表项</h2><p>&emsp;&emsp;本例的效果和上例中的图2很相似，只是每行为3个固定宽度的列表项，并且各列表项之间留有相同宽度的空隙</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex13.png"></image></div><br><div align="center">图3</div>
+
+<p>&emsp;&emsp;传统方式上实现这种效果，不可避免的要用到负margin，那么现在来看了用flex实现的方式吧</p>
+<h3 id="示例代码-2"><a href="#示例代码-2" class="headerlink" title="示例代码"></a>示例代码</h3><p>&emsp;&emsp;css代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ul&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  flex-wrap:wrap;</span><br><span class="line">  justify-content:space-between;</span><br><span class="line">  border:1px solid black;</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">  list-style:none;</span><br><span class="line">  width:120px;</span><br><span class="line">  background:#ddd;</span><br><span class="line">  height:100px;</span><br><span class="line">  border:1px solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用的flex属性-2"><a href="#应用的flex属性-2" class="headerlink" title="应用的flex属性"></a>应用的flex属性</h3><p>&emsp;&emsp;本例中主要应用了以下flex属性：</p>
+<ol>
+<li>justify-content:space-between;使主轴方向的多余空间平均分配在两两item之间</li>
+</ol>
+<h2 id="平均分配空间的栅格布局"><a href="#平均分配空间的栅格布局" class="headerlink" title="平均分配空间的栅格布局"></a>平均分配空间的栅格布局</h2><p>&emsp;&emsp;各大UI里栅格布局基本是必备的布局之一，平均分配布局又是栅格布局里最常用的布局，利用flex实现平均分配的栅格布局，关键之处就是利用它的自动收缩空间。</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex14.png"></image></div><br><div align="center">图4</div>
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>&emsp;&emsp;html如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;row&quot;&gt;</span><br><span class="line">         &lt;div class=&quot;column&quot;&gt;column1&lt;/div&gt;</span><br><span class="line">         &lt;div  class=&quot;column&quot;&gt;colum22&lt;/div&gt;</span><br><span class="line">         &lt;div  class=&quot;column&quot;&gt;colum322&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;css如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.row&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  flex-wrap:wrap;</span><br><span class="line">  border:1px solid black;</span><br><span class="line">&#125;</span><br><span class="line">.column&#123;</span><br><span class="line">  list-style:none;</span><br><span class="line">  background:#ddd;</span><br><span class="line">  flex:1;</span><br><span class="line">  height:100px;</span><br><span class="line">  border:1px solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用的flex属性-3"><a href="#应用的flex属性-3" class="headerlink" title="应用的flex属性"></a>应用的flex属性</h3><p>&emsp;&emsp;本例中主要应用了以下flex属性：</p>
+<ol>
+<li>flex:1 这里针对item应用了flex:1,相当于flex:1 1 0%,而之所以不管各个column元素内容的宽度为多大，都能均分到相等的空间，正式因为相当于在设置了flex-grow:1使得剩余空间按相等比例自动分配的同时又设置了flex-basis:0%,才使得整个空间都平均分配了。</li>
+</ol>
+<h2 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h2><p>&emsp;&emsp;传统的圣杯布局需要涉及绝对定位、浮动、负margin等几大最头疼属性，有了flex布局以后发现，原来这么简单的配方，也能实现这么复杂的效果哈~</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex15.png"></image></div><br><div align="center">图5 圣杯布局</div>
+
+<h3 id="示例代码-3"><a href="#示例代码-3" class="headerlink" title="示例代码"></a>示例代码</h3><p>&emsp;&emsp;html代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">       &lt;main&gt;main&lt;/main&gt;</span><br><span class="line">       &lt;aside&gt;aside&lt;/aside&gt;</span><br><span class="line">       </span><br><span class="line">       &lt;nav&gt;nav&lt;/nav&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;css代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  height:100vh;</span><br><span class="line">&#125;</span><br><span class="line">aside&#123;</span><br><span class="line">  width:50px;</span><br><span class="line">  background:#ccc;</span><br><span class="line">&#125;</span><br><span class="line">main&#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background:#def;</span><br><span class="line">&#125;</span><br><span class="line">nav&#123;</span><br><span class="line">  width:80px;</span><br><span class="line">  background:#ccc;</span><br><span class="line">  order:-1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用的flex属性-4"><a href="#应用的flex属性-4" class="headerlink" title="应用的flex属性"></a>应用的flex属性</h3><ol>
+<li>对main用flex-grow:1,使得中间主元素空间自动扩充</li>
+<li>对nav应用order:-1,使得order处于最左侧(html中main写在了最前，以利于优先加载主内容区)</li>
+</ol>
+<h2 id="元素水平垂直居中"><a href="#元素水平垂直居中" class="headerlink" title="元素水平垂直居中"></a>元素水平垂直居中</h2><p>&emsp;&emsp;如何让一个元素同时水平垂直居中？答案很多样也很复杂，但是在这么多样化得答案中flex绝对是最简单的一种了~</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex16.png"></image></div><br><div align="center">图6 水平垂直居中</div>
+
+<h3 id="示例代码-4"><a href="#示例代码-4" class="headerlink" title="示例代码"></a>示例代码</h3><p>&emsp;&emsp;html代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;inner&quot;&gt;我是中间的内容&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;css代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">  height:300px;</span><br><span class="line">  width:300px;</span><br><span class="line">  border:1px solid red;</span><br><span class="line">  display:flex;</span><br><span class="line">  justify-content:center;</span><br><span class="line">  align-items:center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.inner&#123;</span><br><span class="line">  border:1px solid black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用的flex属性-5"><a href="#应用的flex属性-5" class="headerlink" title="应用的flex属性"></a>应用的flex属性</h3><ol>
+<li>justify-content:center;使item元素水平居中</li>
+<li>align-items:center;使item元素垂直居中</li>
+</ol>
+<p>&emsp;&emsp;这么多场景都难不倒flex有木有，果然名不虚传~(&emsp;&emsp;想更详细的了解flex相关属性的话，请戳<a href="https://juejin.im/post/5b0d6eab6fb9a009ea104bdd" target="_blank" rel="noopener">flex入门—了解这些flex属性</a>~)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/flex入门—了解这些flex属性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hitobear">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小笨熊的旅途">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/flex入门—了解这些flex属性/" itemprop="url">flex入门—了解这些flex属性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T07:13:39+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="传统的页面布局"><a href="#传统的页面布局" class="headerlink" title="传统的页面布局"></a>传统的页面布局</h2><p>&emsp;&emsp;在flex出现之前，双列布局，三列布局，动态盒居中,绝对居中布局等常见的布局均是采用dispaly+float+定位来布局的，一般包括以下几种布局策略：</p>
+<ol>
+<li>normal flow(文档流:块级元素从上到下，行内元素从左到右)</li>
+<li>float + clear</li>
+<li>position relative + absolute</li>
+<li>display inline-block</li>
+<li>负margin(扩大宽度，产生位移，如一行里的多个column)</li>
+</ol>
+<h2 id="flex来了"><a href="#flex来了" class="headerlink" title="flex来了"></a>flex来了</h2><p>&emsp;&emsp;flex-即flexible,弹性的，灵活的，又叫弹性盒布局(flexible box layout)，这种布局方式主要有以下特点：</p>
+<ol>
+<li>块级布局侧重垂直方向，行内布局侧重水平方向，而flex是与方向无关的(来源于后续提到的一个重要属性flex-direction)</li>
+<li>flex布局可以实现空间自动分配、自动对齐(弹性灵活的体现，与后续提到的flex-grow,flex-shrink，flex-basis属性有很大关系)</li>
+<li>flex适用于简单的线性布局(左右或上下布局)，更复杂的布局需要用grid布局(如瀑布流布局)<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex0.png"></image></div>
+
+</li>
+</ol>
+<p>&emsp;&emsp;关于flex布局中，有以下几个基本常识值得注意：</p>
+<ol>
+<li>如图所示flex布局中有两条轴线贯穿了外层容器，分别为主轴和侧轴(这里主轴不一定是水平方向的轴线，具体有flex-direction而定，即主轴和侧轴的方向是不一定的，也印证了flex布局是方向无关的)</li>
+<li>主轴的尺寸为main size,侧轴的尺寸为cross size</li>
+<li>主轴的起点和终点分别为main start和main end,对应的侧轴的起点和终点分别为cross start和cross end</li>
+<li>应用了<code>display:flex</code>属性的元素叫做 flex container，即flex容器，它里面的子元素叫做flex item</li>
+<li>flex 容器的<code>宽度总是自动扩张到最大值</code>(注意是宽度，不管主轴是哪个方向，它的宽度总是会扩张到最大值,即使这个容器元素是行内元素如span,而子元素的宽度受多个属性影响，如flex-direction,align-items,flex-grow等，有时候看起来容器元素的宽度并不等于item元素宽度的和，如下图2所示)</li>
+<li>flex 容器内的子元素即flex-item在不指定height,width的情况下总是自动收缩的(height本来就自动收缩，但当父元素display:flex后，这些子元素的宽度也都自动收缩，而没有了原本块级元素在宽度上自动扩张的特性)，同样的，这里<code>不区分主轴的方向，height,width总是自动收缩</code></li>
+<li>display:flex以后 float,clear,vertical-align等属性均失效</li>
+</ol>
+<h2 id="flex-container的六大属性"><a href="#flex-container的六大属性" class="headerlink" title="flex container的六大属性"></a>flex container的六大属性</h2><h3 id="flex-direction—方向"><a href="#flex-direction—方向" class="headerlink" title="flex-direction—方向"></a>flex-direction—方向</h3><p>&emsp;&emsp;flex-direction 指定了子元素排列的方式，可以为row(按行展示)/column(按列展示)/inherit/row-reverse/column-reverse</p>
+<p>例1. 当flex-direction为row时，显示效果如下：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/05/25flex2.png"></image></div><br><div align="center">图2</div>
+
+<p>其中html和css代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;item&quot;&gt;item1&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;item&quot;&gt;item2&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.container&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  border:1px solid red;</span><br><span class="line">  height:300px;</span><br><span class="line">&#125;</span><br><span class="line">.item&#123;</span><br><span class="line">  border:1px solid black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例2.当为.container添加flex-direction:cloumn属性后，排列效果如下：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/image/css/2018/05/25flex1.png"></image></div><br><div align="center">图3</div>
+
+<p>&emsp;&emsp;图2，图3中的flex-item都没有指定width和height值，但我们通过border可以看到看到，图2中的垂直方向的空间自动填满了container的宽度，即container此时在主轴方向的长度，图3中的水平方向的空间自动填满了container的高度，同样的，这也是container此时在侧轴方向的长度，这个现在和后续提到的<code>align-items</code>有关，不过我们暂时可以做出如下总结：<br>默认情况下，flex-item元素在其侧轴方向的长度总是自动扩张的(当然，后续会知道，只是默认情况，稍微改变align-items属性值，表现就会不一样~)</p>
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>&emsp;&emsp;用于控制是否可以换行(按row排列时)/列(按column排列时)，当flex-wrap是nowrap时，所有items总是自动缩小而不会换行(列)</p>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>&emsp;&emsp;flex-direction和flex-wrap的缩写，如flex:row wrap实际上同时设置了 flex-direction:row和flex-wrap:wrap;</p>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p>&emsp;&emsp;主轴方向的对齐方式，可取:flex-start/flex-end/center/space-around/space-between,默认为flex-start</p>
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>&emsp;&emsp;侧轴方向的对齐方式，可取：flex-start/flex-end/center/stretch/baseline,默认为stretch(填满父空间,<code>前提是不指定height值,当指定了height值时，会以该值为主</code>),也就是之前提到的<code>默认情况下，flex-item元素在其侧轴方向的长度总是自动扩张的</code></p>
+<h4 id="align-itmes-stretch和height同时存在时"><a href="#align-itmes-stretch和height同时存在时" class="headerlink" title="align-itmes:stretch和height同时存在时"></a>align-itmes:stretch和height同时存在时</h4><p>&emsp;&emsp;为了测试指定height时，align-items：stretch还是否会对元素项产生效果，进行了以下测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div class=&quot;outer&quot;&gt;</span><br><span class="line">    &lt;div&gt;item1&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item2&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item3&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item4&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.outer&#123;</span><br><span class="line">    align-items:stretch;</span><br><span class="line">&#125;</span><br><span class="line">.outer div:nth-child(1)&#123;</span><br><span class="line">  height:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex9.png"></image></div>
+
+<p>&emsp;&emsp;如图所示，由于align-items是stretch(也是默认值),所以除item1元素外的所有元素在侧轴方向都自动拉伸到最大了，而item1之所以没有自动拉伸，是因为对其显示设置了高度，此时可以理解为height属性的优先级要更高。</p>
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>&emsp;&emsp;align-content属性和justify-content，align-items是类似的，都是控制item元素之间的摆放方式，只是该属性只有在主轴方向上有多个轴线时才有效，如flex-direction是row时，如果item有换行则align-cnotent属性值有效，当flex-direction是clolumn时，如果item有换列，则align-content有效，其中属性值可以取flex-start/flex-end/center/space-around/space-between/stretch</p>
+<blockquote>
+<p>注意：justify-content是用于控制属于不同的主轴线(可以想象为平行与主轴线)的元素在侧轴方向的的排列方式，其属性值包含space-around/space-between，没有stretch,而align-items是用于控制单个元素在侧轴方向的摆放的，其属性值包含stretch,不含space-around/space-between，align-content则用于控制当同一个侧轴有多个元素时，这些元素之间的摆放方式，它们即可取space-around/space-between，又可取stretch(当每一个侧轴都只穿过一个元素时(即没有多个主轴线，没换行/列)，该属性失效)</p>
+</blockquote>
+<h4 id="align-content和align-items属性同时指定时"><a href="#align-content和align-items属性同时指定时" class="headerlink" title="align-content和align-items属性同时指定时"></a>align-content和align-items属性同时指定时</h4><p>&emsp;&emsp;以flex-direction:row时为例，当item有多行时，align-content和align-items是同时有效的，align-content控制行于行之间的排列关系，align-items控制元素在一行中的位置，可以看下以下例子：</p>
+<p>html和css部分如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  &lt;div class=&quot;outer&quot;&gt;</span><br><span class="line">    &lt;div&gt;item1&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item2&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item3&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item4&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.outer&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  border:1px solid red;</span><br><span class="line">  height:300px;</span><br><span class="line">  align-items:center;</span><br><span class="line">  flex-wrap:wrap;</span><br><span class="line">  align-content:flex-end;</span><br><span class="line">&#125;</span><br><span class="line">.outer div&#123;</span><br><span class="line">  width:200px;</span><br><span class="line">  border:1px solid black;</span><br><span class="line">&#125;</span><br><span class="line">.outer div:nth-child(1)&#123;</span><br><span class="line">  height:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下所示：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex4.jpg"></image></div><br><div align="center">图4</div>
+
+<p>&emsp;&emsp;可以看到，现在item1和item2是处于一行的，item3和item4是处于一行的，由于align-content是flex-end,所以所有行依次排列在侧轴的终点处，同时由于align-items为center，所以item2处于它所在行的垂直方向的中点处(<strong>原来并非相对于它的父元素垂直居中，而是相对于它所在的行垂直居中</strong>)</p>
+<p>&emsp;&emsp;接下来，再看一下把align-items:center去掉的效果</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex5.png"></image></div><br><div align="center">图5</div>
+
+<p>&emsp;&emsp;如图5所示，和刚才不同的是，item2在没有指定高度的情况下自动拉伸为何item1的高度(指定了200px)一样了，其实还是因为align-items的效果，它虽然没有显示指定，但它的默认值是stretch，所以在它所处的行中在垂直方向自动拉伸了。</p>
+<p>&emsp;&emsp;所以，当align-content有效时，不要以为align-items就无效了，只是它们的作用不同而已，一个控制不同行元素相对于父元素(flex-container)的排列方式，一个用于控制元素在所处行中的垂直方向的位置(这里指的flex-direction为row,flex-direction为column时请自行推算~)</p>
+<h2 id="flex-item的六大属性"><a href="#flex-item的六大属性" class="headerlink" title="flex item的六大属性"></a>flex item的六大属性</h2><h3 id="flex-grow-多余空间自动分配比例"><a href="#flex-grow-多余空间自动分配比例" class="headerlink" title="flex-grow:多余空间自动分配比例"></a>flex-grow:多余空间自动分配比例</h3><p>&emsp;&emsp;用于控制当主轴方向空间过多时，元素在主轴方向的长度自动增加；如果多个元素同时指定了flex-grow，则<code>多余的空间</code>会按照各自flex-grow值的比例<code>自动分配</code></p>
+<blockquote>
+<p>默认值：0</p>
+</blockquote>
+<h3 id="flex-shrink-超出空间自动收缩比例"><a href="#flex-shrink-超出空间自动收缩比例" class="headerlink" title="flex-shrink:超出空间自动收缩比例"></a>flex-shrink:超出空间自动收缩比例</h3><p>&emsp;&emsp;当主轴方向空间不够时，使元素在主轴方向的长度自动收缩(即使为元素项设置了显示宽度width值，依然会根据需要自动收缩，不同于之前container中的align-items属性值stretch会低于height的优先级)，以使得总长度能够适应container的长度(当应用了flex-wrap:wrap时，一般是不会自动收缩的，因为这时候自动换行/列了，不会空间不够)</p>
+<blockquote>
+<p>默认值：1</p>
+</blockquote>
+<h4 id="flex-shrink和flex-wrap配合使用"><a href="#flex-shrink和flex-wrap配合使用" class="headerlink" title="flex-shrink和flex-wrap配合使用"></a>flex-shrink和flex-wrap配合使用</h4><p>&emsp;&emsp;flex-shrink的概念已经明了，看上去功能比较单一，不过不同的属性值之间的搭配还是会带来很多样化得效果的，尤其是这里就来看一下flex-shrink和flex-wrap的配合使用。</p>
+<h5 id="flex-shrink-0和flex-wrap-nowrap"><a href="#flex-shrink-0和flex-wrap-nowrap" class="headerlink" title="flex-shrink:0和flex-wrap:nowrap"></a>flex-shrink:0和flex-wrap:nowrap</h5><p>&emsp;&emsp;下面看一下flex-shrink为0并且container没有设置flex-wrap属性时的效果:</p>
+<p>&emsp;&emsp;html和css如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div class=&quot;outer&quot;&gt;</span><br><span class="line">    &lt;div&gt;item1&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item2&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item3&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;item4&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.outer&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  border:1px solid red;</span><br><span class="line">  height:300px;</span><br><span class="line">  align-content:flex-end;</span><br><span class="line">&#125;</span><br><span class="line">.outer div&#123;</span><br><span class="line">  width:150px;</span><br><span class="line">  </span><br><span class="line">  border:1px solid black;</span><br><span class="line">  flex-shrink:0;</span><br><span class="line">&#125;</span><br><span class="line">.outer div:nth-child(1)&#123;</span><br><span class="line">  height:200px;</span><br><span class="line">&#125;</span><br><span class="line">.outer div:nth-child(2)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex6.png"></image></div><br><div align="center">图6</div>
+
+<p>&emsp;&emsp;如上图所示，当设置item的flex-shrink为0时，说明子元素项不会自动收缩，造成的结果就是所有元素项按自身原本的尺寸依次排列，可能会有主轴上总长度超出container在该放向的长度的可能。</p>
+<h5 id="flex-shrink-1和flex-wrap-nowrap"><a href="#flex-shrink-1和flex-wrap-nowrap" class="headerlink" title="flex-shrink:1和flex-wrap:nowrap"></a>flex-shrink:1和flex-wrap:nowrap</h5><p>&emsp;&emsp;接下来，将css中设置的flex-shrink:0去掉(等同于设置了flex-shrink:1,因为这是默认值)，此时效果如下：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex7.png"></image></div><br><div align="center">图7</div>
+
+<p>&emsp;&emsp;如上图所示，此时，各子元素项的宽度(在主轴方向的长度)明显收缩了(小于为其设置的width:150px)，这就是因为默认的flex-shrink:1使得超出的部分均分在了所有子元素项的宽度上。</p>
+<h5 id="flex-shrink-1和flex-wrap-wrap"><a href="#flex-shrink-1和flex-wrap-wrap" class="headerlink" title="flex-shrink:1和flex-wrap:wrap"></a>flex-shrink:1和flex-wrap:wrap</h5><p>&emsp;&emsp;最后，再为container添加flex-wrap:wrap看下是否又会有什么不同呢？</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex8.png"></image></div><br><div align="center">图8</div>
+
+<p>&emsp;&emsp;如图8所示，此时子元素项懂得在合适的位置自动换行了，因此也就不存在宽度超出父元素宽度范围的情况了，所以即使设置了flex-shrink也不会出现长度收缩了~</p>
+<h3 id="flex-basis-原始大小"><a href="#flex-basis-原始大小" class="headerlink" title="flex-basis 原始大小"></a>flex-basis 原始大小</h3><p>&emsp;&emsp;我们都知道为container设置了display:flex后，子元素项的宽度正是恰好包裹自身内容的宽度，相当于是自动的，设置flex-basis后则类似于设置了width值，可以显示指定宽度，取值可以为绝对单位或是百分比(可用于栅格效果)</p>
+<blockquote>
+<p>默认值：auto</p>
+</blockquote>
+<h3 id="flex-缩写"><a href="#flex-缩写" class="headerlink" title="flex 缩写"></a>flex 缩写</h3><p>&emsp;&emsp;flex属性即为flex-grow,flex-shrink,flex-basis三个属性的缩写</p>
+<h3 id="order-指定次序"><a href="#order-指定次序" class="headerlink" title="order 指定次序"></a>order 指定次序</h3><p>&emsp;&emsp;order用于指定子元素项在兄弟元素中排列的顺序，应用该属性可以简单的实现双飞翼布局</p>
+<h3 id="align-self-自身的对齐方式-特殊化自身元素"><a href="#align-self-自身的对齐方式-特殊化自身元素" class="headerlink" title="align-self 自身的对齐方式(特殊化自身元素)"></a>align-self 自身的对齐方式(特殊化自身元素)</h3><p>&emsp;&emsp;align-self指定元素自身在侧轴上的对齐方式，可以用来<code>覆盖align-items属性的值对自身设置的效果</code>。</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex10.png"></image></div><br><div align="center">图9</div>
+
+<p>&emsp;&emsp;如图9所示，当align-items为stretch，item1的align-slef为center时，除item1外的所有元素在侧轴方向的对齐方式都是自动延伸的，而item1元素因为应用了align-slef:center,明显是垂直居中的。</p>
+<p>&emsp;&emsp;想了解不同布局的flex实现方式的话，请戳<a href="https://juejin.im/post/5b0d6ca76fb9a009fd0e9329" target="_blank" rel="noopener">进一步了解flex布局—来实现这些常见布局吧</a>~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/立即执行函数和闭包/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1387,480 +1930,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/CSS中元素的相对值/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hitobear">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小笨熊的旅途">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/19/CSS中元素的相对值/" itemprop="url">CSS中元素的相对值</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T16:54:40+08:00">
-                2018-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>css中的单位有相对和绝对之分，如<code>em</code> <code>rem</code> 是相对单位,<code>px</code>是绝对单位,而相对又有不同的基准值之分，如<code>font-size</code>为百分比时，是相对于其父元素的<code>font-size</code>计算值，而<code>line-height</code>为小数时，是相对于本元素的<code>font-size</code>计算值的，一般说来，相比于绝对单位,使用相对单位能够更加灵活的控制元素的大小,能够以更少的代码达到自适应效果,同时使各元素或各属性之间的大小关系更加清晰,直观。</p>
-<h2 id="使用绝对单位px来设置属性值"><a href="#使用绝对单位px来设置属性值" class="headerlink" title="使用绝对单位px来设置属性值"></a>使用绝对单位<code>px</code>来设置属性值</h2><p>先来看一个简单的只包含基本问候语的页面，页面效果如下:</p>
-<p><div align="center"><img src="http://p4a8bakov.bkt.clouddn.com/px.png" width="300" height="300"></div><br>实际的代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">        margin:0;</span><br><span class="line">    &#125;</span><br><span class="line">    #wrapper&#123;</span><br><span class="line">        text-align:center;</span><br><span class="line">        font-size:16px;</span><br><span class="line">        line-height:24px;</span><br><span class="line">    &#125;</span><br><span class="line">    body&#123;</span><br><span class="line">        display:flex;</span><br><span class="line">        justify-content:center;</span><br><span class="line">        align-items:center;</span><br><span class="line">        height:100vh;</span><br><span class="line">        background:linear-gradient(rgba(177,206,90,0.5),rgba(177,206,90,1));</span><br><span class="line">    &#125;</span><br><span class="line">    h2&#123;</span><br><span class="line">        text-align: center;</span><br><span class="line">        font-size:24px;</span><br><span class="line">        line-height:36px;</span><br><span class="line">        margin-bottom:40px;</span><br><span class="line">    &#125;</span><br><span class="line">    p.content&#123;</span><br><span class="line">        text-align:center;</span><br><span class="line">        width:200px;</span><br><span class="line">        margin-bottom:20px;</span><br><span class="line">        font-size:18px;</span><br><span class="line">        line-height:25px;</span><br><span class="line">    &#125;</span><br><span class="line">    button&#123;</span><br><span class="line">        padding: 6px 16px;</span><br><span class="line">        border: 1px solid #446d88;</span><br><span class="line">        background: #58a linear-gradient(#77a0bb, #58a);</span><br><span class="line">        border-radius: 4px;</span><br><span class="line">        box-shadow: 0 1px 5px gray;</span><br><span class="line">        color: white;</span><br><span class="line">        text-shadow: 0 -1px 1px #335166;</span><br><span class="line">        font-size: 20px;</span><br><span class="line">        line-height: 30px;</span><br><span class="line">        display:inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;wrapper&quot;&gt;&lt;h2&gt;CSS之旅&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;content&quot;&gt;欢迎来到CSS世界,我们一起成长吧~&lt;/p&gt;</span><br><span class="line">    &lt;button&gt;Welcome&lt;/button&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<p>可以看到，在这里的代码中，包括行高,字体大小，宽度，高度，内边距等等所有的长度单位都用的<code>px</code>,虽然看上去大小很直观，像素值一目了然，但是与此同时后期的维护体验是相当的差。。</p>
-<h2 id="line-height-的相对值"><a href="#line-height-的相对值" class="headerlink" title="line-height 的相对值"></a>line-height 的相对值</h2><p>可以看到，上述的代码中，共有三个地方都出现了<code>line-height</code>属性的设置，包括外层的<code>div</code>,内层的<code>button</code>和<code>p</code>，而且经过稍微的运算可以得出<code>lineheight</code>的值是<code>font-size</code>值的<code>1.5</code>倍,那么如果因为某种原因，我需要将dev的<code>font-size</code>值由<code>16px</code>改为<code>12px</code>,为了确保行高相对于字体的大小和原来不变，需要重新计算出<code>12px</code>的<code>1.5</code>倍的值，其他的字体大小改变同样要经过这个计算，那么既然我们已经直到行高相对于字体大小的比例是固定的，有没有什么办法不用每次<code>font-size</code>值改变时，行高都需要手动重写计算呢？幸好，是有的~~</p>
-<h3 id="line-height设为百分比"><a href="#line-height设为百分比" class="headerlink" title="line-height设为百分比"></a>line-height设为百分比</h3><p><code>line-height</code>值可以设置为百分比，此时它的计算值为<strong>元素本身</strong>的<code>font-size</code>值的百分比大小。<br>上一节的情况，由于想要让行高是字体大小的<code>1.5倍</code>，只要将行高属性设置为<code>line-height:150%</code>即可,这样，当元素的<code>font-size</code>值无论如何变化，<code>line-height</code>的值都无需更改，也能保持行高为元素字体的<code>1.5倍</code>(浏览器会自动计算)</p>
-<h3 id="line-height设为小数"><a href="#line-height设为小数" class="headerlink" title="line-height设为小数"></a>line-height设为小数</h3><p>经过了上述改进，已经可以做到<code>font-size</code>改变时，无需改变<code>line-height</code>了，但现在还有一个问题，可以看到<code>p</code>元素和<code>buttong</code>元素的<code>line-height</code>值和<code>div</code>元素的<code>line-height</code>值是一样的,都是相对于各自元素的字体大小的<code>150%</code>即<code>1.5</code>倍，如果我们确定这几个元素中每个元素的行高和字体比是一样的，那么当这个比例由<code>1.5</code>改为<code>1.6</code>时，需要同时更改这三个元素的<code>line-height</code>属性从<code>150%</code>到<code>160%</code>,这个过程看上去也有些冗余，有没有其它办法呢？当然也是有的~<br>这三个元素有个特点，即<code>p</code>和<code>button</code>元素是<code>div</code>元素的子元素，这时候为了避免上述情况的冗余变更，可以将<code>line-height</code>属性值由<code>百分比形式变为小数形式</code> </p>
-<p><strong><code>line-height</code>设为小数时，可以让继承其属性的子元素直接继承该小数点，而line-height设为百分比时，继承该属性的子元素继承的则是父元素计算好的实际像素值</strong>，这是<code>line-height</code>设置为小数点和百分比的本质区别。</p>
-<p>举例来说，在本例中<code>p</code>时<code>div</code>元素的子元素，如果父元素<code>div</code>的行高设置为<code>150%</code>,不为<code>p</code>元素设置<code>line-height</code>属性的话，则<code>p</code>元素默认继承父元素的<code>line-height</code>计算值(即16px<em>150%=24px)，则无论<code>p</code>元素的<code>font-size</code>值为多大，行高都保持<code>24px</code>，显然时不合理的。这时，为了既能继承父元素的行高和元素字体大小比，又能与元素本身的字体大小相关，只需<strong>将父元素的行高设置为小数形式</strong>即可,给<code>div</code>设置<code>line-height:1.5</code>,这样<code>p</code>元素默认继承的是<code>line-height:1.5</code>,**它的计算值是自身的font-size值</em>1.5**</p>
-<p>采取为父元素设置行高为小数点的形式，这样无需为子元素设置<code>line-height</code>,也会默认继承父元素的行高字体比，(因为<strong><code>line-height</code>属性默认就是继承的</strong>，<code>button</code>元素需要设置<code>line-height:inherit</code>，显示指定继承，否则会被浏览器添加的用户样式覆盖),这中方式既省去了设置多个元素的<code>line-height</code>属性值，又避免了行高字体比变化时的代码冗余变更问题，当比例变化为1.6时，只需显示改变父元素<code>div</code>的行高为<code>line-height：1.6</code>即可。</p>
-<h2 id="font-size的相对值"><a href="#font-size的相对值" class="headerlink" title="font-size的相对值"></a>font-size的相对值</h2><p>示例代码中，父元素<code>div</code>的<code>font-size</code>值是<code>16px</code>,<code>button</code>元素的<code>font-size</code>值是<code>20px</code>,是其父元素的<code>125%</code>,同样地，如果想让buttong元素的字体大小固定为父元素字体大小的<code>1.25</code>倍的话，当父元素的字体值改变时，这时不得不重新计算<code>button</code>元素的大小并重新设置该属性值，为了避免这个问题，font-size也支持相对值，即<code>百分比格式的数值</code>,<strong>当<code>font-size</code>设置为百分比时,是相当于其父元素字体的百分比</strong></p>
-<h2 id="em和rem"><a href="#em和rem" class="headerlink" title="em和rem"></a>em和rem</h2><p>除了某些元素可以设置为百分比外，还有两个相对长度单位，<code>em</code>和<code>rem</code>,<code>em</code>和<code>rem</code>都是灵活，可扩展的长度单位，直接相关于字体的默认大小或指定的大小值，可应用于元素的<code>padding</code>,<code>marign</code>,<code>border-width</code>,<code>line-height</code>等属性。</p>
-<h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>当使用em单位时，实际像素值是em值乘以使用em单位的元素本身的字体大小，如一个元素的<code>font-size</code>值是<code>12px</code>,则当padding值设置为<code>0.2em</code>时，实际内边距的像素值是<code>12*0.2</code>即<code>2.4px</code>。<br>应用em，可以将该例中button相关的<code>padding</code>,<code>margin</code>值设置为相对于字体<code>font-size</code>的像素值的特定比例大小(边框的宽度无需用<code>em</code>表示，固定为<code>px</code>即可)</p>
-<p>将本例中的<code>button</code>元素改良为<code>em</code>值后，相关属性设置如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">button&#123;</span><br><span class="line">        padding: .3em .8em;</span><br><span class="line">        border: 1px solid #446d88;</span><br><span class="line">        background: #58a linear-gradient(#77a0bb, #58a);</span><br><span class="line">        border-radius: .2em;</span><br><span class="line">        box-shadow: 0 .05em .25em gray;</span><br><span class="line">        color: white;</span><br><span class="line">        text-shadow: 0 -0.05em 0.05em #335166;</span><br><span class="line">        font-size: 125%;</span><br><span class="line">        line-height: inherit;</span><br><span class="line">        display:inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p><code>rem</code>和<code>em</code>极其类似，当使用 <code>rem</code>时，实际的像素大小取决于页面根元素的字体大小，即 html 元素的字体大小，像素值等于根元素字体大小乘以 rem 值</p>
-<p>综上，<code>rem</code>和<code>em</code>使得内外边距，边框等属性都能够相对于字体大小进行设置(等同于可以设置相对字体大小的百分比，用小数点+em单位来表示)，不同之处在于，<code>em</code>是相对于元素本身的字体大小进行设置，而<code>rem</code>是相对于页面根元素(<code>html</code>)的字体大小进行设置的，要想区分要用<code>em</code>还是<code>rem</code>单位，只需确定该属性是和元素本身的字体大小相关联还是和<code>html</code>元素的字体大小相关联</p>
-<p>综上，CSS中应用相对值时，最重要的还是分析清楚属性之间的相关性。<br><a href="https://github.com/hitobear/cssgarden/blob/master/realative/index.html" target="_blank" rel="noopener">代码请戳</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/15/yinyang/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hitobear">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小笨熊的旅途">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/15/yinyang/" itemprop="url">copy一个精致的单个div实现的阴阳图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-15T10:27:32+08:00">
-                2018-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="css画阴阳图"><a href="#css画阴阳图" class="headerlink" title="css画阴阳图"></a>css画阴阳图</h3><p>学着<a href="https://css-tricks.com/examples/ShapesOfCSS/" target="_blank" rel="noopener">CSS-tricks</a>的阴阳效果，自己也画了一个作为练习，虽然实现方式是copy的原效果的，哈哈，最起码能理解整个效果了，而且能自己背着copy下来了(( ╯□╰ )),还是很开心的，这里对整个实现的过程做一个小总结</p>
-<h3 id="目标效果"><a href="#目标效果" class="headerlink" title="目标效果"></a>目标效果</h3><p>最终呈现效果是黑白阴阳图，最外层大圆所占空间宽度是100px,第二层的两个凸起圆所占宽度为48px,最内层的小圆直径是12px.</p>
-<h3 id="实现阴阳图"><a href="#实现阴阳图" class="headerlink" title="实现阴阳图"></a>实现阴阳图</h3><blockquote>
-<p>画一个下黑上白的div框  </p>
-</blockquote>
-<p>从最终效果里可以看到，这应该是由一个正方形的div框演变而来的，这个div框的下边一半是黑色的，上边一般是白色的,那么如何实现呢？脑海里可能会闪过几种不同的实现方式，比如通过两个div合成，上div背景白色，下div北京黑色，再比如只用一个div的话，考虑填充色中上一半白色，下一半黑色，用颜色渐变来实现就好了，其实好像还有更简单的办法，考虑到最终效果知识下边一半是黑色而已，并没有说下边的黑色一定是内容区啊，所以这里完全可以用更加通俗易懂的边框来实现，把整个下半部分都当做边框就可以了，所以这块儿就通过<strong>纯border的设置来实现这个效果</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">#yinyang&#123;</span><br><span class="line">      border-color:black;</span><br><span class="line">      border-width:2px 2px 50px 2px;</span><br><span class="line">      height:48px;</span><br><span class="line">      width:96px;</span><br><span class="line">      border-style:solid;</span><br><span class="line">      position:relative;</span><br><span class="line">      background:white;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div id=&quot;yinyang&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>完成最外层大圆效果</p>
-</blockquote>
-<p>由正方形变成圆形，毫不犹豫，只要设置<code>border-radius</code>属性就可以了，这里我们为<code>div#yinyang</code>添加属性设置<code>border-radius:50%</code>即可(<strong>这里设置为大于50%也可以,浏览器会自动显示为各个border的圆角交接为止,不会互相超出</strong>)</p>
-<blockquote>
-<p>添加中层圆效果</p>
-</blockquote>
-<p>第二层分别左右两侧各有一个中圆，设置它们的宽度为48px(去除了外层圆的2px的边框),同样是圆形，这里当然可以考虑左右各添加一个绝对定位的div来实现，但想到<code>before,after</code>这两个伪元素(<em>**</em>)，他们不正可以用来为div添加内容吗？所以这里完全可以利用他们，节省两个div~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#yinyang::before&#123;</span><br><span class="line">     content:&apos;&apos;;</span><br><span class="line">     width:48px;</span><br><span class="line">     height:48px;</span><br><span class="line">     background:black;</span><br><span class="line">     position:absolute;</span><br><span class="line">     border-radius:100%;</span><br><span class="line">     top:50%;</span><br><span class="line">     left:0;</span><br><span class="line">   &#125;</span><br><span class="line">    #yinyang::after&#123;</span><br><span class="line">     content:&apos;&apos;;</span><br><span class="line">     width:48px;</span><br><span class="line">     height:48px;</span><br><span class="line">     background:white;</span><br><span class="line">     position:absolute;</span><br><span class="line">     border-radius:100%;</span><br><span class="line">     top:50%;</span><br><span class="line">     right:0;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里有一点需要注意下，刚添加玩before,after伪元素后，我没有看到任何效果，尝试了好几次才发现原来少了一个<code>content</code>属性，这里就是常常被我忽略的：<strong>before after伪元素一定要加上content属性，它的一系列属性效果才会生效，即使设置了边框，哪怕这个content的内容是空字符串也可以</strong></p>
-<blockquote>
-<p>实现小圆效果</p>
-</blockquote>
-<p>最后还差最内层的小圆了，最开始想到的是像上一层一样，再添加个before，after伪元素来实现小圆，但由于上一层已经用了这两个伪元素了，而before里再嵌套before是无效的，所以这种方式行不通了。。那么再换一种方式思考，不就是中圆里嵌套一个小圆吗，为什么要分别画两个圆呢？完全可以把内层的圆和外层的圆环当作同一个圆的两部分啊，内层的圆作为圆的内容，外层的圆环是圆的边框就可以了，通过设置一个圆的背景色和边框色就可以实现了~所以现在来改一下上一步的对伪元素的属性设置，为其添加边框，设置边框和宽度的比例等等<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#yinyang::before&#123;</span><br><span class="line">      content:&apos;&apos;;</span><br><span class="line">      width:12px;</span><br><span class="line">      height:12px;</span><br><span class="line">      border:18px solid black;</span><br><span class="line">      background:white;</span><br><span class="line">      position:absolute;</span><br><span class="line">      border-radius:100%;</span><br><span class="line">      top:50%;</span><br><span class="line">      left:0;</span><br><span class="line">    &#125;</span><br><span class="line">     #yinyang::after&#123;</span><br><span class="line">      content:&apos;&apos;;</span><br><span class="line">      width:12px;</span><br><span class="line">      height:12px;</span><br><span class="line">      border:18px solid white;</span><br><span class="line">      background:black;</span><br><span class="line">      position:absolute;</span><br><span class="line">      border-radius:100%;</span><br><span class="line">      top:50%;</span><br><span class="line">      right:0;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="自动旋转的阴阳图"><a href="#自动旋转的阴阳图" class="headerlink" title="自动旋转的阴阳图"></a>自动旋转的阴阳图</h3><p>目前为止，一个完整的阴阳图已经可以显示了~那现在可以考虑为它添加一点简单的动画，比如让它自己不停的匀速旋转，这里利用了<code>css3</code>的<code>animation</code>和<code>transform</code>属性，相关代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> @keyframes spin &#123;</span><br><span class="line">       0% &#123;</span><br><span class="line">        transform: rotate(0deg);</span><br><span class="line">        &#125;</span><br><span class="line">      100% &#123;</span><br><span class="line">        transform: rotate(360deg);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"> #yinyang&#123;</span><br><span class="line">      ...</span><br><span class="line">      animation: spin 1.4s infinite linear; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>到这里效果就完成了，<a href="http://jsbin.com/jaliwex/edit?html,output" target="_blank" rel="noopener">这里</a>可以预览完整效果和查看代码,最后再总结一下阴阳图效果实现中的tips</p>
-<blockquote>
-<p>Tips</p>
-<ol>
-<li>可以考虑设置不同的<code>border</code>宽度来取代某些简单情况的渐变实现</li>
-<li>考虑用<code>before</code> <code>after</code>伪元素代理空的div子元素设置效果(注意设置’content’)</li>
-<li>考虑用内容和边框分离表现来代替div的嵌套</li>
-</ol>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/搭建我的hexo博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hitobear">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小笨熊的旅途">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/搭建我的hexo博客/" itemprop="url">搭建我的hexo博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T11:03:53+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我的hexo博客终于搭建完成了，虽然用基础工具都是前人的分享，各种高大上的hexo博客教程也有很多了，但这里还是想分享一下自己博客能够在浏览器中看到的喜悦，所以来做一下博客搭建的小总结(本文适用于windows下的搭建)~</p>
-<h1 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h1><p>因为目标是基于github.io来实现博客的访问，当然离不开git仓库了，后续hexo的发布也会和github绑定，除此之外，关键的一点是，gitbash安装后不仅可以执行git相关命令，它相当于一个windows上的linux操作系统，可以执行大部分linux命令，所以这里首要的就是安装git了~<br>首先去<a href="https://git-scm.com/" target="_blank" rel="noopener">git官网</a>下载gitbash(只需右击git bash here即可进行命令行操作)</p>
-<h1 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h1><p>之所以安装node有两个原因：</p>
-<blockquote>
-<ol>
-<li>node是一个JS执行环境，之后可以基于node进行js相关的服务端开发</li>
-<li>很多node相关的程序包都可以通过npm来进行管理，包括上传，下载，管理依赖，可以说npm是一个nodejs的程序仓库,有了npm，就可以获得很多已有的成熟的nodejs程序，所以我们需要npm，包括之后会用到的hexo也可以通过npm获得，而这里只要安装了node，就会同时自动安装npm，供我们以后使用</li>
-</ol>
-</blockquote>
-<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><blockquote>
-<ol>
-<li>从<a href="https://nodejs.org/en/" target="_blank" rel="noopener">官网</a>下载安装</li>
-<li>执行 <code>node -v</code> <code>npm -v</code>命令，能正确的输出版本信息，说明安装成功 </li>
-<li>右击打开git bash，依次执行如下命令，对npm进行配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org/</span><br><span class="line">npm config set loglevel http</span><br><span class="line">npm config set progress false</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-<p>npm的配置文件是~/.npmrc,可以编辑该文件进行配置的变更</p>
-<h1 id="hexo安装和使用"><a href="#hexo安装和使用" class="headerlink" title="hexo安装和使用"></a>hexo安装和使用</h1><blockquote>
-<ol>
-<li>右击进入 gitbash</li>
-<li>安装hexo命令行工具 npm install -g hexo-cli</li>
-<li>新建一个空目录，并进入该目录，在该目录下进行操作 <code>mkdir hexo &amp;&amp; cd ..</code></li>
-<li>初始化本地的hexo目录，<code>hexo init myBlog</code></li>
-<li><code>cd myBlog &amp;&amp; npm i</code> myBlog目录下的package.json进行依赖的安装</li>
-<li><code>hexo new firstblog</code> 此时第一篇博客文档(<code>firstblog.md</code>)会在<code>source/_posts</code>目录下生成</li>
-<li>start 文档路径,开始编辑博客内容</li>
-<li>start _config.yml,编辑博客的配置<br><code>把第 6 行的 title 改成你想要的名字
-把第 9 行的 author 改成你的大名
-把最后一行的 type 改成 type: git
-在最后一行后面新增一行，左边与 type 平齐，
-加上一行 repo:  仓库地址 （仓库地址以 git@github.com: 开头）</code></li>
-<li>这里说到hexo的发布要和github的仓库关联，所以要配置repo为github的仓库地址,如果还没有gigpage仓库，请参考下一节 gitPage仓库的配置。</li>
-<li><code>npm install hexo-deployer-git --save</code>，安装 git 部署插件,使得自动部署到github仓库</li>
-<li><code>hexo deploy</code> 发布当前的md博客</li>
-<li>进入<code>username.github.io</code>仓库，可以看到当前仓库有了新的commit，多了很多文件，就是hexo自动push的</li>
-<li>浏览器输入username.github.io可以预览生成的博客首页了</li>
-</ol>
-</blockquote>
-<h1 id="博客更新"><a href="#博客更新" class="headerlink" title="博客更新"></a>博客更新</h1><blockquote>
-<ol>
-<li>在本地的博客目录下编辑内容(可以通过<code>hexo new</code>或直接编辑新建)</li>
-<li>执行 <code>hexo generate</code><br>执行 <code>hexo deploy</code>即可刷新你的gitpage页面了</li>
-</ol>
-</blockquote>
-<h1 id="博客主题的变更"><a href="#博客主题的变更" class="headerlink" title="博客主题的变更"></a>博客主题的变更</h1><p>有很多开源的博客主题,这里有一些<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">主题推荐</a>，可找到合适自己的主题应用到自己的博客上，省时省力又漂亮(感兴趣的话以后有能力可以制作自己的博客主题分享给大家哈哈)，我这里选择了<code>iissnan/hexo-theme-next</code>这个主题，所以以它为例进行下配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd themes</span><br><span class="line">git clone git@github.com:iissnan/hexo-theme-next.git</span><br><span class="line">cd ..</span><br><span class="line">将 _config.yml 的第 75 行改为 theme: hexo-theme-next</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></p>
-<h1 id="博客源码的保存"><a href="#博客源码的保存" class="headerlink" title="博客源码的保存"></a>博客源码的保存</h1><p>进入你的gitpage仓库会发现，仓库上的代码好像都不是我认识的，我写的markdown文件怎么不见了呢？确实这些代码都是由hexo生成后的博客代码，可以说是经过了hexo的编译转化的，我当然不认识了:&gt;，那怎么样把我的博客源码推上仓库呢？也简单，新建一个github仓库就可以了，如新建<code>blog-generator</code>,把本地的hexo博客所在目录和<code>blog-generator</code>绑定就可以了，具体步骤如下:</p>
-<blockquote>
-<ol>
-<li>在 GitHub 创建 blog-generator <code>空仓库</code></li>
-<li>在本地的hexo博客代码根目录如myBlog下执行如下命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;hello&quot; &gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git add origin git@github.com:hitobear/blog-generator.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-<p>执行完这几个命令后，博客的源码，就会出现在<code>blog-generator</code>仓库了，以后每次变更博客内容后，在执行<code>hexo generator &amp;&amp; hexo deploy</code>命令之后，再执行 <code>git add ,git commit,git push</code>即可将最新的博客内容包括原始的markdown文件提交到<code>blog-generator</code>仓库了~</p>
-<h1 id="gitPage仓库的配置"><a href="#gitPage仓库的配置" class="headerlink" title="gitPage仓库的配置"></a>gitPage仓库的配置</h1><blockquote>
-<ol>
-<li>首先由一个github账号</li>
-<li>新建一个名为 username.github.io的仓库，该仓库默认是开启gitPage功能的，如果仓库名称是其他，则需要另行配置以开启gitPage功能。</li>
-<li>只有本地git配置了以后，才可以将本地仓库push到远端的github仓库，所以还需要打开gitbash执行以下步骤进行git配置(已经绑定过github并能正常push代码的可以跳过4-8步)</li>
-<li>生成本地的sshkey, <code>ssh-keygen -t rsa -b 4096 -C 邮箱名称</code>,此时命令行会和你交互，这期间连按三次回车即可</li>
-<li>执行完4之后查看<code>~/.ssh/</code>目录下会有<code>id_rsa.push</code>文件,复制该文件的全部内容</li>
-<li>进入 <a href="https://github.com/settings/keys" target="_blank" rel="noopener">github配置页面</a>，单机New SSH Key，需要输入Title和Key，Title可以随意填写一个标识名称，此时的Key则是刚刚第5步复制的内容，直接粘贴即可，点击 Add SSH key</li>
-<li>回到gitBash,输入<code>ssh -T git@github.com</code>命令，与控制台的交互过程中输入yes即可完成和github的绑定配置</li>
-<li>接下来，依次执行以下几个命令进行git本地仓库的配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name 你的英文名</span><br><span class="line">git config --global user.email 你的邮箱</span><br><span class="line">git config --global push.default matching</span><br><span class="line">git config --global core.quotepath false</span><br><span class="line">git config --global core.editor &quot;vim&quot;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1904,7 +1980,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="flex:1引发的疑惑&amp;emsp;&amp;emsp;flex是flex-grow,flex-shrink,flex-basis三个属性值的缩写，所以我也曾以为只是单纯缩写而已，没什么复杂的，直到看了flex:1能实现各子元素均分外层容器空间的效果： 图1  &amp;emsp;&amp;emsp;html和css代码如下： 12345678910111213141516&amp;lt;div class=&amp;quot;conta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重新认识flex缩写属性—[flex]">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/重新认识flex缩写属性—[flex]/index.html">
+<meta property="og:site_name" content="小笨熊的旅途">
+<meta property="og:description" content="flex:1引发的疑惑&amp;emsp;&amp;emsp;flex是flex-grow,flex-shrink,flex-basis三个属性值的缩写，所以我也曾以为只是单纯缩写而已，没什么复杂的，直到看了flex:1能实现各子元素均分外层容器空间的效果： 图1  &amp;emsp;&amp;emsp;html和css代码如下： 12345678910111213141516&amp;lt;div class=&amp;quot;conta">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-30T23:09:16.323Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重新认识flex缩写属性—[flex]">
+<meta name="twitter:description" content="flex:1引发的疑惑&amp;emsp;&amp;emsp;flex是flex-grow,flex-shrink,flex-basis三个属性值的缩写，所以我也曾以为只是单纯缩写而已，没什么复杂的，直到看了flex:1能实现各子元素均分外层容器空间的效果： 图1  &amp;emsp;&amp;emsp;html和css代码如下： 12345678910111213141516&amp;lt;div class=&amp;quot;conta">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/重新认识flex缩写属性—[flex]/"/>
+
+
+
+
+
+  <title>重新认识flex缩写属性—[flex] | 小笨熊的旅途</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小笨熊的旅途</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/重新认识flex缩写属性—[flex]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hitobear">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小笨熊的旅途">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">重新认识flex缩写属性—[flex]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T06:54:56+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="flex-1引发的疑惑"><a href="#flex-1引发的疑惑" class="headerlink" title="flex:1引发的疑惑"></a>flex:1引发的疑惑</h2><p>&emsp;&emsp;flex是flex-grow,flex-shrink,flex-basis三个属性值的缩写，所以我也曾以为只是单纯缩写而已，没什么复杂的，直到看了flex:1能实现各子元素均分外层容器空间的效果：</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex17.png"></image></div><br><div align="center">图1</div>
+
+<p>&emsp;&emsp;html和css代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;我是左侧的item&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;我是右侧的item,我的内容比较多&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.container&#123;</span><br><span class="line">     height:300px;</span><br><span class="line">     width:400px;</span><br><span class="line">     border:1px solid red;</span><br><span class="line">     display:flex;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> .inner&#123;</span><br><span class="line">     border:1px solid black;</span><br><span class="line">     flex:1;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;按照我最初的理解，flex:1相当于设置了flex-grow:1,flex-shrink:1(默认值),flex-basis:auto(默认值)，而如果对元素这样设置三个属性值的话，效果如下图2所示，明显是水平均分的，因为flex-grow为1只是表示均分多余的空间</p>
+<div align="center"><image src="http://p4a8bakov.bkt.clouddn.com/flex18.png"></image></div><br><div align="center">图2</div>
+
+<p>&emsp;&emsp;那么问题来了，flex:1并不等价于flex-grow:1,flex-shrink:1(默认值),flex-basis:auto啊，说好的缩写呢？</p>
+<h2 id="flex是缩写"><a href="#flex是缩写" class="headerlink" title="flex是缩写"></a>flex是缩写</h2><p>&emsp;&emsp;flex是flex-grow,flex-shrink和flex-basis的缩写，flex属性值可以只指定一个属性的值，而另外的属性值采用各自在flex属性中的的初始值，但是有一点要注意的是：flex属性中flex-grow和flex-basis的初始值和它们原始的默认值不同，至于为什么不同，mdn中有明确的说过<code>这样的设计是为了让「flex」缩写在最常见的情景下比较好用。</code></p>
+<h2 id="flex中对应各属性的初始值"><a href="#flex中对应各属性的初始值" class="headerlink" title="flex中对应各属性的初始值"></a>flex中对应各属性的初始值</h2><h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h3><p>&emsp;&emsp;flex-grow用于设置各item项按对应比例划分剩余空间，若flex中没有指定flex-grow,则相当于设置了flex-grow:1</p>
+<h3 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h3><p>&emsp;&emsp;flex-shrink用于设置item的总和超出容器空间时，各item的收缩比例，若flex中没有指定flex-shrink,则等同于设置了flex-shrink:1</p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>&emsp;&emsp;flex-basis用于设置各item项的伸缩基准值，可以取值为长度或百分比，如果flex中省略了该属性，则相当于设置了flex-basis:0.</p>
+<h2 id="flex的不同取值"><a href="#flex的不同取值" class="headerlink" title="flex的不同取值"></a>flex的不同取值</h2><p>&emsp;&emsp;flex的值的完整写法是[\<flex-grow> \<flex-shrink> \<flex-basis>],不过它的取值还有可能是单个数字或者单个百分比等，不同种类的取值所表示的意思是大有不同的。</flex-basis></flex-shrink></flex-grow></p>
+<h3 id="flex值为none"><a href="#flex值为none" class="headerlink" title="flex值为none"></a>flex值为none</h3><p>&emsp;&emsp;当flex为none时,等同于flex: 0 0 auto;</p>
+<h3 id="flex值为auto"><a href="#flex值为auto" class="headerlink" title="flex值为auto"></a>flex值为auto</h3><p>&emsp;&emsp;当flex为auto时，等同于flex: 1 1 auto;</p>
+<h3 id="flex值为一个非负数字"><a href="#flex值为一个非负数字" class="headerlink" title="flex值为一个非负数字"></a>flex值为一个非负数字</h3><p>&emsp;&emsp;当flex取值为一个数字，则该数字是设置的flex-grow值，其它两个属性用初始值，如flex:1时，等同于flex: 1 1 0%</p>
+<h3 id="flex值为两个非负数字"><a href="#flex值为两个非负数字" class="headerlink" title="flex值为两个非负数字"></a>flex值为两个非负数字</h3><p>&emsp;&emsp;当flex取值为2个数字时，相当于设置的flex-grow和flex-shrink值，flex-basis取值为初始值，如flex:1 0时，等同于flex: 1 0 0%</p>
+<h3 id="flex值为一个数字和一个长度或百分比时"><a href="#flex值为一个数字和一个长度或百分比时" class="headerlink" title="flex值为一个数字和一个长度或百分比时"></a>flex值为一个数字和一个长度或百分比时</h3><p>&emsp;&emsp;当flex取值为1个数字和1个长度或百分比时，设置的是flex-grow和flex-basis的值，flex-shrink值时初始值，如flex:1 20%,等同于flex: 1 1 20%</p>
+<p>&emsp;&emsp;原来一个简单的缩写属性flex是有这么多花样的~那么我不想背它的初始值，不同值对应的缩放属性等等，有这么多原因，以后是不是不用flex就可以了，光明正大用flex-grow,flex-shrink,flex-basis就好了？当然是可以了~不过用flex至少还是有它的好处的，比如说看上去简洁(一个flex属性能有这么多不同效果进而显得高大上),还有重要的一点，同样的一个单词能完成三个单词的工作，能使代码少啊:）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/29/进一步了解flex布局—来实现这些常见布局吧/" rel="next" title="进一步了解flex布局—来实现这些常见布局吧">
+                <i class="fa fa-chevron-left"></i> 进一步了解flex布局—来实现这些常见布局吧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hitobear</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-1引发的疑惑"><span class="nav-number">1.</span> <span class="nav-text">flex:1引发的疑惑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex是缩写"><span class="nav-number">2.</span> <span class="nav-text">flex是缩写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex中对应各属性的初始值"><span class="nav-number">3.</span> <span class="nav-text">flex中对应各属性的初始值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-grow"><span class="nav-number">3.1.</span> <span class="nav-text">flex-grow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-shrink"><span class="nav-number">3.2.</span> <span class="nav-text">flex-shrink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-basis"><span class="nav-number">3.3.</span> <span class="nav-text">flex-basis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex的不同取值"><span class="nav-number">4.</span> <span class="nav-text">flex的不同取值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flex值为none"><span class="nav-number">4.1.</span> <span class="nav-text">flex值为none</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex值为auto"><span class="nav-number">4.2.</span> <span class="nav-text">flex值为auto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex值为一个非负数字"><span class="nav-number">4.3.</span> <span class="nav-text">flex值为一个非负数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex值为两个非负数字"><span class="nav-number">4.4.</span> <span class="nav-text">flex值为两个非负数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex值为一个数字和一个长度或百分比时"><span class="nav-number">4.5.</span> <span class="nav-text">flex值为一个数字和一个长度或百分比时</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hitobear</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
